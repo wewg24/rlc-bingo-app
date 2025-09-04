@@ -3,33 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <meta name="mobile-web-app-capable" content="yes">
+    <title>RLC Bingo Closet</title>
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#667eea">
     <meta name="apple-mobile-web-app-capable" content="yes">
-    
-    <title>RLC Bingo Manager</title>
-    
-    <!-- Material Icons -->
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     
     <style>
-        /* ==================== CSS Variables ==================== */
-        :root {
-            --primary-color: #1976d2;
-            --primary-dark: #1565c0;
-            --success-color: #43a047;
-            --warning-color: #fb8c00;
-            --error-color: #e53935;
-            --info-color: #00acc1;
-            --text-primary: #212121;
-            --text-secondary: #616161;
-            --text-disabled: #9e9e9e;
-            --border-color: #e0e0e0;
-            --background-color: #f5f5f5;
-            --card-background: #ffffff;
-            --header-height: 60px;
-            --nav-height: 60px;
-        }
-        
         * {
             margin: 0;
             padding: 0;
@@ -38,51 +18,53 @@
         }
         
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: var(--background-color);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
-            color: var(--text-primary);
+            overflow-x: hidden;
         }
         
-        /* ==================== Login Screen ==================== */
+        /* Login Screen */
         .login-container {
+            min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
-            min-height: 100vh;
             padding: 20px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        .login-container.hidden {
+            display: none;
         }
         
         .login-card {
             background: white;
             border-radius: 20px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            padding: 30px;
             width: 100%;
             max-width: 400px;
-            padding: 40px 30px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
         }
         
-        .login-header {
+        .app-logo {
             text-align: center;
-            margin-bottom: 40px;
+            margin-bottom: 30px;
         }
         
-        .login-logo {
-            font-size: 48px;
+        .app-logo .icon {
+            font-size: 60px;
             margin-bottom: 10px;
         }
         
-        .login-title {
+        .app-logo h1 {
+            color: #333;
             font-size: 28px;
             font-weight: 700;
-            color: var(--text-primary);
-            margin-bottom: 5px;
         }
         
-        .login-subtitle {
-            color: var(--text-secondary);
-            font-size: 14px;
+        .app-logo p {
+            color: #666;
+            margin-top: 5px;
         }
         
         .form-group {
@@ -92,1100 +74,924 @@
         .form-label {
             display: block;
             margin-bottom: 8px;
-            color: var(--text-secondary);
-            font-size: 14px;
+            color: #333;
             font-weight: 500;
         }
         
         .form-input {
             width: 100%;
-            padding: 12px 15px;
-            border: 2px solid var(--border-color);
+            padding: 14px;
+            border: 2px solid #e0e0e0;
             border-radius: 10px;
             font-size: 16px;
-            transition: all 0.2s;
-            background: white;
+            transition: border-color 0.3s;
         }
         
         .form-input:focus {
             outline: none;
-            border-color: var(--primary-color);
-            box-shadow: 0 0 0 3px rgba(25, 118, 210, 0.1);
+            border-color: #667eea;
         }
         
-        .login-button {
+        .btn {
             width: 100%;
             padding: 14px;
-            background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
-            color: white;
             border: none;
             border-radius: 10px;
             font-size: 16px;
             font-weight: 600;
             cursor: pointer;
-            transition: transform 0.2s;
-            margin-top: 10px;
+            transition: transform 0.2s, box-shadow 0.2s;
         }
         
-        .login-button:active {
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        
+        .btn-primary:active {
             transform: scale(0.98);
         }
         
-        .login-button:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
+        .btn-success {
+            background: linear-gradient(135deg, #66bb6a 0%, #43a047 100%);
+            color: white;
         }
         
-        .login-error {
-            color: var(--error-color);
-            font-size: 14px;
-            text-align: center;
-            margin-top: 15px;
-            padding: 10px;
-            background: rgba(229, 57, 53, 0.1);
-            border-radius: 5px;
-            display: none;
-        }
-        
-        /* ==================== Main App Container ==================== */
+        /* Main App */
         .app-container {
             display: none;
             min-height: 100vh;
-            background: var(--background-color);
+            background: #f5f5f5;
         }
         
         .app-container.active {
             display: block;
         }
         
-        /* ==================== Header ==================== */
-        .header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: var(--header-height);
-            background: var(--primary-color);
+        /* Header */
+        .app-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
+            padding: 20px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .header-content {
             display: flex;
-            align-items: center;
             justify-content: space-between;
-            padding: 0 20px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            z-index: 1000;
+            align-items: center;
         }
         
         .header-title {
             font-size: 20px;
             font-weight: 600;
+        }
+        
+        .header-user {
             display: flex;
             align-items: center;
             gap: 10px;
-        }
-        
-        .header-info {
-            display: flex;
-            align-items: center;
-            gap: 15px;
             font-size: 14px;
         }
         
-        .session-info {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .admin-badge {
-            background: var(--warning-color);
-            padding: 4px 10px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: 600;
-        }
-        
-        .logout-btn {
-            background: rgba(255,255,255,0.2);
-            border: 1px solid rgba(255,255,255,0.3);
-            padding: 6px 12px;
-            border-radius: 5px;
+        .btn-logout {
+            background: rgba(255, 255, 255, 0.2);
             color: white;
-            cursor: pointer;
-            font-size: 14px;
-            transition: background 0.2s;
-        }
-        
-        .logout-btn:hover {
-            background: rgba(255,255,255,0.3);
-        }
-        
-        /* ==================== Main Content ==================== */
-        .main-content {
-            padding-top: var(--header-height);
-            padding-bottom: var(--nav-height);
-            min-height: 100vh;
-        }
-        
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-        
-        /* ==================== Date Selection for Admin ==================== */
-        .admin-date-selector {
-            background: var(--warning-color);
-            color: white;
-            padding: 15px 20px;
-            border-radius: 10px;
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-        
-        .admin-date-selector label {
-            font-weight: 600;
-            margin-right: 10px;
-        }
-        
-        .admin-date-selector input[type="date"] {
-            padding: 8px 12px;
+            padding: 8px 16px;
             border: none;
-            border-radius: 5px;
-            font-size: 14px;
-        }
-        
-        /* ==================== Progress Bar (Hidden for now) ==================== */
-        .progress-bar {
-            display: none;
-        }
-        
-        /* ==================== Form Sections ==================== */
-        .form-section {
-            background: white;
-            border-radius: 10px;
-            padding: 25px;
-            margin-bottom: 20px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-        
-        .section-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 20px;
-            padding-bottom: 15px;
-            border-bottom: 2px solid var(--background-color);
-        }
-        
-        .section-title {
-            font-size: 20px;
-            font-weight: 600;
-            color: var(--text-primary);
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        /* ==================== Sales Entry Grid ==================== */
-        .sales-category {
-            background: var(--background-color);
-            border-radius: 8px;
-            padding: 15px;
-            margin-bottom: 20px;
-        }
-        
-        .category-header {
-            font-weight: 600;
-            color: var(--primary-dark);
-            margin-bottom: 12px;
-            font-size: 14px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-        
-        .sales-item {
-            display: grid;
-            grid-template-columns: 2fr 1fr 1fr;
-            gap: 10px;
-            align-items: center;
-            background: white;
-            padding: 12px;
             border-radius: 6px;
-            margin-bottom: 8px;
-            border: 1px solid var(--border-color);
+            cursor: pointer;
         }
         
-        .item-name {
-            font-size: 14px;
-            font-weight: 500;
-        }
-        
-        .item-price {
-            font-size: 12px;
-            color: var(--text-secondary);
-        }
-        
-        .quantity-input {
-            width: 100%;
-            padding: 8px;
-            border: 1px solid var(--border-color);
-            border-radius: 4px;
-            text-align: center;
-            font-size: 14px;
-        }
-        
-        .quantity-input:focus {
-            outline: none;
-            border-color: var(--primary-color);
-            box-shadow: 0 0 0 2px rgba(25, 118, 210, 0.1);
-        }
-        
-        .item-total {
-            text-align: right;
-            font-weight: 600;
-            color: var(--success-color);
-        }
-        
-        /* ==================== Totals Summary ==================== */
-        .totals-card {
-            background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
-            color: white;
-            border-radius: 10px;
-            padding: 20px;
-            margin-top: 20px;
-        }
-        
-        .totals-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 15px;
-            margin-bottom: 15px;
-        }
-        
-        .total-item {
-            padding: 10px;
-            background: rgba(255,255,255,0.1);
-            border-radius: 5px;
-        }
-        
-        .total-label {
-            font-size: 12px;
-            opacity: 0.9;
-            margin-bottom: 5px;
-        }
-        
-        .total-value {
-            font-size: 20px;
-            font-weight: 600;
-        }
-        
-        .grand-total {
-            font-size: 28px;
-            font-weight: 700;
-            text-align: center;
-            padding-top: 15px;
-            border-top: 2px solid rgba(255,255,255,0.3);
-        }
-        
-        /* ==================== Pull Tab Section ==================== */
-        .pulltab-entry {
-            background: var(--background-color);
-            border-radius: 8px;
-            padding: 15px;
-            margin-bottom: 15px;
-            border: 1px solid var(--border-color);
-        }
-        
-        .pulltab-header {
+        /* Navigation Tabs */
+        .nav-tabs {
             display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 10px;
-        }
-        
-        .game-selector {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid var(--border-color);
-            border-radius: 6px;
-            font-size: 14px;
             background: white;
-            margin-bottom: 10px;
+            border-bottom: 1px solid #e0e0e0;
+            position: sticky;
+            top: 68px;
+            z-index: 50;
         }
         
-        .game-details {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 10px;
-            font-size: 13px;
-        }
-        
-        .detail-row {
-            display: flex;
-            justify-content: space-between;
-            padding: 5px 0;
-            border-bottom: 1px dotted var(--border-color);
-        }
-        
-        .detail-label {
-            color: var(--text-secondary);
-        }
-        
-        .detail-value {
-            font-weight: 600;
-        }
-        
-        /* ==================== Buttons ==================== */
-        .btn {
-            padding: 10px 20px;
-            border-radius: 6px;
-            font-size: 14px;
-            font-weight: 600;
+        .nav-tab {
+            flex: 1;
+            padding: 16px;
+            background: none;
             border: none;
             cursor: pointer;
-            transition: all 0.2s;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
+            font-size: 14px;
+            color: #666;
+            position: relative;
+            transition: color 0.3s;
         }
         
-        .btn-primary {
-            background: var(--primary-color);
-            color: white;
+        .nav-tab.active {
+            color: #667eea;
+            font-weight: 600;
         }
         
-        .btn-primary:hover {
-            background: var(--primary-dark);
-        }
-        
-        .btn-success {
-            background: var(--success-color);
-            color: white;
-        }
-        
-        .btn-outline {
-            background: white;
-            color: var(--primary-color);
-            border: 2px solid var(--primary-color);
-        }
-        
-        .btn-full {
-            width: 100%;
-            justify-content: center;
-        }
-        
-        /* ==================== Bottom Nav ==================== */
-        .bottom-nav {
-            position: fixed;
+        .nav-tab.active::after {
+            content: '';
+            position: absolute;
             bottom: 0;
             left: 0;
             right: 0;
-            height: var(--nav-height);
+            height: 3px;
+            background: #667eea;
+        }
+        
+        /* Content */
+        .content {
+            padding: 20px;
+        }
+        
+        .content-section {
+            display: none;
+        }
+        
+        .content-section.active {
+            display: block;
+            animation: fadeIn 0.3s;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        /* Stats Cards */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .stat-card {
             background: white;
-            box-shadow: 0 -2px 4px rgba(0,0,0,0.1);
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-            z-index: 1000;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
         }
         
-        .nav-item {
-            flex: 1;
+        .stat-value {
+            font-size: 28px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 5px;
+        }
+        
+        .stat-label {
+            font-size: 12px;
+            color: #666;
+            text-transform: uppercase;
+        }
+        
+        /* Cards */
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .card-header {
+            font-size: 18px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        /* Forms */
+        .form-row {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+        
+        .form-row.single {
+            grid-template-columns: 1fr;
+        }
+        
+        .input-group {
+            margin-bottom: 15px;
+        }
+        
+        .input-label {
+            display: block;
+            margin-bottom: 6px;
+            color: #666;
+            font-size: 14px;
+        }
+        
+        .input-field {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+        
+        .input-field:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        
+        /* Pull Tab Games List */
+        .games-grid {
+            display: grid;
+            gap: 12px;
+            max-height: 300px;
+            overflow-y: auto;
+            padding-right: 5px;
+        }
+        
+        .game-card {
+            background: #f9f9f9;
+            padding: 15px;
+            border-radius: 8px;
             display: flex;
-            flex-direction: column;
+            justify-content: space-between;
             align-items: center;
-            padding: 8px;
             cursor: pointer;
-            color: var(--text-secondary);
-            transition: color 0.2s;
+            transition: background 0.3s;
         }
         
-        .nav-item.active {
-            color: var(--primary-color);
+        .game-card:active {
+            background: #e0e0e0;
         }
         
-        .nav-icon {
-            font-size: 24px;
+        .game-name {
+            font-weight: 500;
+            color: #333;
             margin-bottom: 4px;
         }
         
-        .nav-label {
-            font-size: 11px;
-            font-weight: 500;
+        .game-info {
+            font-size: 12px;
+            color: #666;
         }
         
-        /* ==================== Toast Notifications ==================== */
+        .game-prize {
+            font-size: 20px;
+            font-weight: bold;
+            color: #667eea;
+        }
+        
+        /* Quick Entry Buttons */
+        .quick-entry {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        
+        .quick-btn {
+            padding: 12px;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            background: white;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .quick-btn:active {
+            background: #667eea;
+            color: white;
+            transform: scale(0.95);
+        }
+        
+        /* Toast */
         .toast {
             position: fixed;
-            top: 80px;
+            bottom: -100px;
+            left: 20px;
             right: 20px;
             background: white;
-            padding: 15px 20px;
-            border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            padding: 16px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
             display: flex;
             align-items: center;
-            gap: 10px;
-            transform: translateX(400px);
-            transition: transform 0.3s ease;
-            z-index: 2000;
-            min-width: 250px;
+            gap: 12px;
+            transition: bottom 0.3s;
+            z-index: 1000;
         }
         
         .toast.show {
-            transform: translateX(0);
+            bottom: 20px;
         }
         
         .toast.success {
-            border-left: 4px solid var(--success-color);
+            border-left: 4px solid #66bb6a;
         }
         
         .toast.error {
-            border-left: 4px solid var(--error-color);
-        }
-        
-        .toast.warning {
-            border-left: 4px solid var(--warning-color);
-        }
-        
-        .toast.info {
-            border-left: 4px solid var(--info-color);
+            border-left: 4px solid #ef5350;
         }
         
         .toast-icon {
-            font-size: 20px;
+            font-size: 24px;
         }
         
-        .toast.success .toast-icon { color: var(--success-color); }
-        .toast.error .toast-icon { color: var(--error-color); }
+        /* Loading Spinner */
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid #e0e0e0;
+            border-top-color: #667eea;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 20px auto;
+        }
         
-        /* ==================== Responsive ==================== */
-        @media (max-width: 768px) {
-            .sales-item {
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        /* Responsive */
+        @media (max-width: 400px) {
+            .stats-grid {
                 grid-template-columns: 1fr;
-                gap: 8px;
             }
             
-            .item-total {
-                text-align: left;
-            }
-            
-            .totals-grid {
-                grid-template-columns: 1fr 1fr;
+            .form-row {
+                grid-template-columns: 1fr;
             }
         }
     </style>
 </head>
 <body>
+    <!-- Configuration -->
+    <script>
+        // IMPORTANT: Update this with your Google Apps Script Web App URL
+        const API_URL = 'https://script.google.com/macros/s/AKfycbyAo1IsuFempsKZ3pE9fbxFImbFI-Ff2fpn6DJZEhlLXpkFrQJo6cdvyoOj4T1QkHmskg/exec';
+        
+        // Local storage keys
+        const STORAGE_KEYS = {
+            user: 'rlc_user',
+            token: 'rlc_token',
+            cache: 'rlc_cache'
+        };
+    </script>
+
     <!-- Login Screen -->
     <div class="login-container" id="loginScreen">
         <div class="login-card">
-            <div class="login-header">
-                <div class="login-logo">🦁</div>
-                <h1 class="login-title">RLC Bingo</h1>
-                <p class="login-subtitle">Closet Reporting System</p>
+            <div class="app-logo">
+                <div class="icon">🦁</div>
+                <h1>RLC Bingo</h1>
+                <p>Closet Entry System</p>
             </div>
+            
             <form id="loginForm">
                 <div class="form-group">
                     <label class="form-label">Username</label>
-                    <input type="text" id="username" class="form-input" required autocomplete="username">
+                    <input type="text" class="form-input" id="username" required autocomplete="username">
                 </div>
+                
                 <div class="form-group">
                     <label class="form-label">Password</label>
-                    <input type="password" id="password" class="form-input" required autocomplete="current-password">
+                    <input type="password" class="form-input" id="password" required autocomplete="current-password">
                 </div>
-                <button type="submit" class="login-button" id="loginBtn">Sign In</button>
-                <div class="login-error" id="loginError"></div>
+                
+                <button type="submit" class="btn btn-primary" id="loginBtn">
+                    Sign In
+                </button>
             </form>
         </div>
     </div>
-    
+
     <!-- Main App -->
-    <div class="app-container" id="appContainer">
+    <div class="app-container" id="appScreen">
         <!-- Header -->
-        <header class="header">
-            <div class="header-title">
-                <span>🦁</span>
-                <span>RLC Bingo Manager</span>
-            </div>
-            <div class="header-info">
-                <div class="session-info">
+        <div class="app-header">
+            <div class="header-content">
+                <div class="header-title">RLC Bingo</div>
+                <div class="header-user">
                     <span id="currentUser">User</span>
-                    <span class="admin-badge" id="adminBadge" style="display:none;">ADMIN</span>
+                    <button class="btn-logout" onclick="logout()">Logout</button>
                 </div>
-                <button class="logout-btn" onclick="logout()">Logout</button>
-            </div>
-        </header>
-        
-        <!-- Main Content -->
-        <div class="main-content">
-            <div class="container">
-                <!-- Admin Date Selector -->
-                <div class="admin-date-selector" id="adminDateSelector" style="display:none;">
-                    <div>
-                        <label>Admin Mode: Select Occasion Date</label>
-                        <input type="date" id="occasionDate" onchange="updateOccasionDate()">
-                    </div>
-                    <div style="font-size: 12px;">
-                        You can enter data for any date as an administrator
-                    </div>
-                </div>
-                
-                <!-- Door Sales Section -->
-                <div class="form-section">
-                    <div class="section-header">
-                        <div class="section-title">
-                            <span class="material-icons">point_of_sale</span>
-                            Door Sales Summary Entry
-                        </div>
-                    </div>
-                    
-                    <!-- Electronic Bingo -->
-                    <div class="sales-category">
-                        <div class="category-header">Electronic Bingo</div>
-                        <div class="sales-item">
-                            <div>
-                                <div class="item-name">27reg18pro - Small Machine</div>
-                                <div class="item-price">$40.00 each</div>
-                            </div>
-                            <input type="number" class="quantity-input" id="elec_small" min="0" value="0" data-price="40">
-                            <div class="item-total">$0.00</div>
-                        </div>
-                        <div class="sales-item">
-                            <div>
-                                <div class="item-name">45reg36pro - Large Machine</div>
-                                <div class="item-price">$65.00 each</div>
-                            </div>
-                            <input type="number" class="quantity-input" id="elec_large" min="0" value="0" data-price="65">
-                            <div class="item-total">$0.00</div>
-                        </div>
-                    </div>
-                    
-                    <!-- Paper Products -->
-                    <div class="sales-category">
-                        <div class="category-header">Paper Products</div>
-                        <div class="sales-item">
-                            <div>
-                                <div class="item-name">6 Face</div>
-                                <div class="item-price">$10.00 each</div>
-                            </div>
-                            <input type="number" class="quantity-input" id="paper_6face" min="0" value="0" data-price="10">
-                            <div class="item-total">$0.00</div>
-                        </div>
-                        <div class="sales-item">
-                            <div>
-                                <div class="item-name">9 Face Solid</div>
-                                <div class="item-price">$15.00 each</div>
-                            </div>
-                            <input type="number" class="quantity-input" id="paper_9solid" min="0" value="0" data-price="15">
-                            <div class="item-total">$0.00</div>
-                        </div>
-                        <div class="sales-item">
-                            <div>
-                                <div class="item-name">9 Face Stripe</div>
-                                <div class="item-price">$10.00 each</div>
-                            </div>
-                            <input type="number" class="quantity-input" id="paper_9stripe" min="0" value="0" data-price="10">
-                            <div class="item-total">$0.00</div>
-                        </div>
-                        <div class="sales-item">
-                            <div>
-                                <div class="item-name">Birthday Pack (BOGO)</div>
-                                <div class="item-price">$0.00 promotional</div>
-                            </div>
-                            <input type="number" class="quantity-input" id="paper_birthday" min="0" value="0" data-price="0">
-                            <div class="item-total">$0.00</div>
-                        </div>
-                        <div class="sales-item">
-                            <div>
-                                <div class="item-name">Early Bird Double</div>
-                                <div class="item-price">$5.00 each</div>
-                            </div>
-                            <input type="number" class="quantity-input" id="paper_earlybird" min="0" value="0" data-price="5">
-                            <div class="item-total">$0.00</div>
-                        </div>
-                        <div class="sales-item">
-                            <div>
-                                <div class="item-name">Coverall Extra ($500)</div>
-                                <div class="item-price">$1.00 each</div>
-                            </div>
-                            <input type="number" class="quantity-input" id="paper_coverall" min="0" value="0" data-price="1">
-                            <div class="item-total">$0.00</div>
-                        </div>
-                        <div class="sales-item">
-                            <div>
-                                <div class="item-name">Letter X Extra ($250)</div>
-                                <div class="item-price">$1.00 each</div>
-                            </div>
-                            <input type="number" class="quantity-input" id="paper_letterx" min="0" value="0" data-price="1">
-                            <div class="item-total">$0.00</div>
-                        </div>
-                        <div class="sales-item">
-                            <div>
-                                <div class="item-name">Number 7 Extra ($250)</div>
-                                <div class="item-price">$1.00 each</div>
-                            </div>
-                            <input type="number" class="quantity-input" id="paper_number7" min="0" value="0" data-price="1">
-                            <div class="item-total">$0.00</div>
-                        </div>
-                        <div class="sales-item">
-                            <div>
-                                <div class="item-name">Progressive 18 Face</div>
-                                <div class="item-price">$5.00 each</div>
-                            </div>
-                            <input type="number" class="quantity-input" id="paper_prog18" min="0" value="0" data-price="5">
-                            <div class="item-total">$0.00</div>
-                        </div>
-                        <div class="sales-item">
-                            <div>
-                                <div class="item-name">Progressive 3 Face</div>
-                                <div class="item-price">$1.00 each</div>
-                            </div>
-                            <input type="number" class="quantity-input" id="paper_prog3" min="0" value="0" data-price="1">
-                            <div class="item-total">$0.00</div>
-                        </div>
-                    </div>
-                    
-                    <!-- Miscellaneous -->
-                    <div class="sales-category">
-                        <div class="category-header">Miscellaneous</div>
-                        <div class="sales-item">
-                            <div>
-                                <div class="item-name">Daubers</div>
-                                <div class="item-price">$2.00 each</div>
-                            </div>
-                            <input type="number" class="quantity-input" id="misc_daubers" min="0" value="0" data-price="2">
-                            <div class="item-total">$0.00</div>
-                        </div>
-                    </div>
-                    
-                    <!-- Players Count -->
-                    <div class="sales-category">
-                        <div class="category-header">Attendance</div>
-                        <div class="sales-item">
-                            <div>
-                                <div class="item-name">Total Players</div>
-                                <div class="item-price">Number of attendees</div>
-                            </div>
-                            <input type="number" class="quantity-input" id="total_players" min="0" value="0" style="border-color: var(--primary-color);">
-                            <div></div>
-                        </div>
-                    </div>
-                    
-                    <!-- Totals -->
-                    <div class="totals-card">
-                        <div class="totals-grid">
-                            <div class="total-item">
-                                <div class="total-label">Electronic</div>
-                                <div class="total-value" id="electronicTotal">$0</div>
-                            </div>
-                            <div class="total-item">
-                                <div class="total-label">Paper</div>
-                                <div class="total-value" id="paperTotal">$0</div>
-                            </div>
-                            <div class="total-item">
-                                <div class="total-label">Misc</div>
-                                <div class="total-value" id="miscTotal">$0</div>
-                            </div>
-                            <div class="total-item">
-                                <div class="total-label">Players</div>
-                                <div class="total-value" id="playersDisplay">0</div>
-                            </div>
-                        </div>
-                        <div class="grand-total" id="grandTotal">$0.00</div>
-                    </div>
-                </div>
-                
-                <!-- Pull Tabs Section -->
-                <div class="form-section">
-                    <div class="section-header">
-                        <div class="section-title">
-                            <span class="material-icons">confirmation_number</span>
-                            Pull Tab Games
-                        </div>
-                    </div>
-                    
-                    <div id="pullTabsList">
-                        <!-- Pull tab entries will be added here -->
-                    </div>
-                    
-                    <button class="btn btn-outline btn-full" onclick="addPullTabGame()">
-                        <span class="material-icons">add</span>
-                        Add Pull Tab Game
-                    </button>
-                    
-                    <div class="totals-card" style="margin-top: 20px;">
-                        <div class="totals-grid">
-                            <div class="total-item">
-                                <div class="total-label">Gross Sales</div>
-                                <div class="total-value" id="ptGross">$0</div>
-                            </div>
-                            <div class="total-item">
-                                <div class="total-label">Prizes Paid</div>
-                                <div class="total-value" id="ptPrizes">$0</div>
-                            </div>
-                            <div class="total-item">
-                                <div class="total-label">Net Profit</div>
-                                <div class="total-value" id="ptProfit">$0</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Submit Button -->
-                <button class="btn btn-success btn-full" onclick="saveOccasion()" style="margin-top: 20px; font-size: 18px; padding: 15px;">
-                    <span class="material-icons">save</span>
-                    Save Occasion Data
-                </button>
             </div>
         </div>
-        
-        <!-- Bottom Navigation -->
-        <nav class="bottom-nav">
-            <div class="nav-item active">
-                <span class="material-icons nav-icon">input</span>
-                <span class="nav-label">Entry</span>
+
+        <!-- Navigation -->
+        <div class="nav-tabs">
+            <button class="nav-tab active" onclick="showTab('dashboard')">Dashboard</button>
+            <button class="nav-tab" onclick="showTab('doorSales')">Door Sales</button>
+            <button class="nav-tab" onclick="showTab('pullTabs')">Pull Tabs</button>
+        </div>
+
+        <!-- Content -->
+        <div class="content">
+            <!-- Dashboard Section -->
+            <div class="content-section active" id="dashboardSection">
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-value" id="todayRevenue">$0</div>
+                        <div class="stat-label">Today's Revenue</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="playerCount">0</div>
+                        <div class="stat-label">Players</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="doorSalesTotal">$0</div>
+                        <div class="stat-label">Door Sales</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="pullTabTotal">$0</div>
+                        <div class="stat-label">Pull Tab Sales</div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">Quick Actions</div>
+                    <div style="display: grid; gap: 10px;">
+                        <button class="btn btn-primary" onclick="showTab('doorSales')">
+                            Enter Door Sales
+                        </button>
+                        <button class="btn btn-success" onclick="showTab('pullTabs')">
+                            Record Pull Tab Sale
+                        </button>
+                    </div>
+                </div>
             </div>
-            <div class="nav-item">
-                <span class="material-icons nav-icon">history</span>
-                <span class="nav-label">History</span>
+
+            <!-- Door Sales Section -->
+            <div class="content-section" id="doorSalesSection">
+                <div class="card">
+                    <div class="card-header">Door Sales Entry</div>
+                    <form id="doorSalesForm">
+                        <div class="form-row">
+                            <div class="input-group">
+                                <label class="input-label">Date</label>
+                                <input type="date" class="input-field" id="salesDate" required>
+                            </div>
+                            <div class="input-group">
+                                <label class="input-label">Players</label>
+                                <input type="number" class="input-field" id="players" min="0" required>
+                            </div>
+                        </div>
+                        
+                        <h4 style="margin: 20px 0 10px;">Paper Sales</h4>
+                        
+                        <div class="quick-entry">
+                            <button type="button" class="quick-btn" onclick="incrementField('paper6Face')">
+                                6 Face +1
+                            </button>
+                            <button type="button" class="quick-btn" onclick="incrementField('paper9Solid')">
+                                9 Solid +1
+                            </button>
+                            <button type="button" class="quick-btn" onclick="incrementField('paper9Stripe')">
+                                9 Stripe +1
+                            </button>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="input-group">
+                                <label class="input-label">6 Face ($10)</label>
+                                <input type="number" class="input-field" id="paper6Face" min="0" value="0">
+                            </div>
+                            <div class="input-group">
+                                <label class="input-label">9 Solid ($15)</label>
+                                <input type="number" class="input-field" id="paper9Solid" min="0" value="0">
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="input-group">
+                                <label class="input-label">9 Stripe ($10)</label>
+                                <input type="number" class="input-field" id="paper9Stripe" min="0" value="0">
+                            </div>
+                            <div class="input-group">
+                                <label class="input-label">Early Birds ($2.50)</label>
+                                <input type="number" class="input-field" id="paperEarlybird" min="0" value="0">
+                            </div>
+                        </div>
+                        
+                        <h4 style="margin: 20px 0 10px;">Electronic & Other</h4>
+                        
+                        <div class="form-row">
+                            <div class="input-group">
+                                <label class="input-label">Electronic $40</label>
+                                <input type="number" class="input-field" id="elec40" min="0" value="0">
+                            </div>
+                            <div class="input-group">
+                                <label class="input-label">Electronic $65</label>
+                                <input type="number" class="input-field" id="elec65" min="0" value="0">
+                            </div>
+                        </div>
+                        
+                        <div class="form-row single">
+                            <div class="input-group">
+                                <label class="input-label">Daubers ($2)</label>
+                                <input type="number" class="input-field" id="daubers" min="0" value="0">
+                            </div>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary">Save Door Sales</button>
+                    </form>
+                </div>
             </div>
-            <div class="nav-item">
-                <span class="material-icons nav-icon">assessment</span>
-                <span class="nav-label">Reports</span>
+
+            <!-- Pull Tabs Section -->
+            <div class="content-section" id="pullTabsSection">
+                <div class="card">
+                    <div class="card-header">Available Games</div>
+                    <div class="games-grid" id="gamesList">
+                        <div class="spinner"></div>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header">Record Sale</div>
+                    <form id="pullTabForm">
+                        <div class="form-row single">
+                            <div class="input-group">
+                                <label class="input-label">Select Game</label>
+                                <select class="input-field" id="gameSelect" required>
+                                    <option value="">Loading games...</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="input-group">
+                                <label class="input-label">Serial Number</label>
+                                <input type="text" class="input-field" id="serialNumber" required>
+                            </div>
+                            <div class="input-group">
+                                <label class="input-label">Starting Tickets</label>
+                                <input type="number" class="input-field" id="startTickets" min="0" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="input-group">
+                                <label class="input-label">Ending Tickets</label>
+                                <input type="number" class="input-field" id="endTickets" min="0" required>
+                            </div>
+                            <div class="input-group">
+                                <label class="input-label">Prizes Paid</label>
+                                <input type="number" class="input-field" id="prizesPaid" min="0" step="0.01" required>
+                            </div>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary">Record Sale</button>
+                    </form>
+                </div>
             </div>
-        </nav>
+        </div>
     </div>
-    
+
     <!-- Toast Notification -->
     <div class="toast" id="toast">
-        <span class="material-icons toast-icon" id="toastIcon">info</span>
-        <span id="toastMessage">Message</span>
+        <span class="toast-icon" id="toastIcon">✓</span>
+        <span id="toastMessage">Success!</span>
     </div>
-    
+
     <script>
-        // ==================== CONFIGURATION ====================
-        const CONFIG = {
-            spreadsheetId: '1pmJO2WFi--TJs4kr1pFhKxBXEw4AiZdmrTIQ1_HBrVM',
-            apiKey: 'AIzaSyCPcWHEm0KLyp-8DVKfEm_gYn9pfyxBmmQ',
-            scriptUrl: 'https://script.google.com/macros/s/AKfycbyAo1IsuFempsKZ3pE9fbxFImbFI-Ff2fpn6DJZEhlLXpkFrQJo6cdvyoOj4T1QkHmskg/exec'
-        };
-        
-        // User credentials (for testing - in production, this would be server-side)
-        const USERS = {
-            'wigginsb': { password: 'wig2866', name: 'B. Wiggins', role: 'admin' },
-            'williamsm': { password: 'wil0387', name: 'M. Williams', role: 'admin' },
-            'asberryw': { password: 'asb0260', name: 'W. Asberry', role: 'closet' },
-            'parryw': { password: 'par9666', name: 'W. Parry', role: 'closet' },
-            'hribarc': { password: 'hri0643', name: 'C. Hribar', role: 'closet' },
-            'eppersonb': { password: 'epp3532', name: 'B. Epperson', role: 'closet' },
-            'masonb': { password: 'mas4830', name: 'B. Mason', role: 'view' }
-        };
-        
-        // Pull Tab Games Library
-        const PULLTAB_GAMES = [
-            { id: 'PT001', name: 'Race Horse Downs 250', tickets: 1000, price: 1, payout: 670, profit: 330 },
-            { id: 'PT002', name: 'Race Horse Downs 500', tickets: 2040, price: 1, payout: 1425, profit: 615 },
-            { id: 'PT003', name: 'Pot of Gold 280', tickets: 440, price: 1, payout: 280, profit: 160 },
-            { id: 'PT004', name: 'Pot of Gold 400', tickets: 660, price: 1, payout: 400, profit: 260 },
-            { id: 'PT005', name: 'Patriot 599', tickets: 840, price: 1, payout: 599, profit: 241 },
-            { id: 'PT006', name: 'Life Happens 599', tickets: 960, price: 1, payout: 599, profit: 361 }
-        ];
-        
-        // ==================== STATE ====================
+        // State Management
         let currentUser = null;
-        let occasionData = {
-            date: new Date().toISOString().split('T')[0],
-            doorSales: {},
-            pullTabs: [],
-            totals: {}
-        };
-        let pullTabCounter = 0;
+        let pullTabGames = [];
         
-        // ==================== INITIALIZATION ====================
+        // Initialize App
         document.addEventListener('DOMContentLoaded', function() {
+            checkAuth();
             setupEventListeners();
-            
-            // Check for saved session
-            const savedUser = sessionStorage.getItem('currentUser');
+            setDefaultDate();
+        });
+        
+        // Setup Event Listeners
+        function setupEventListeners() {
+            document.getElementById('loginForm').addEventListener('submit', handleLogin);
+            document.getElementById('doorSalesForm').addEventListener('submit', handleDoorSales);
+            document.getElementById('pullTabForm').addEventListener('submit', handlePullTabs);
+        }
+        
+        // Check Authentication
+        function checkAuth() {
+            const savedUser = localStorage.getItem(STORAGE_KEYS.user);
             if (savedUser) {
                 currentUser = JSON.parse(savedUser);
                 showApp();
             }
-        });
-        
-        function setupEventListeners() {
-            // Login form
-            document.getElementById('loginForm').addEventListener('submit', handleLogin);
-            
-            // Quantity inputs
-            document.querySelectorAll('.quantity-input').forEach(input => {
-                input.addEventListener('input', calculateTotals);
-            });
-            
-            // Set today's date as default
-            document.getElementById('occasionDate').value = new Date().toISOString().split('T')[0];
         }
         
-        // ==================== AUTHENTICATION ====================
+        // Handle Login
         async function handleLogin(e) {
             e.preventDefault();
             
-            const username = document.getElementById('username').value.trim();
+            const username = document.getElementById('username').value;
             const password = document.getElementById('password').value;
-            const errorDiv = document.getElementById('loginError');
             const loginBtn = document.getElementById('loginBtn');
             
-            // Clear previous errors
-            errorDiv.style.display = 'none';
-            errorDiv.textContent = '';
-            
-            // Disable button
-            loginBtn.disabled = true;
             loginBtn.textContent = 'Signing in...';
+            loginBtn.disabled = true;
             
-            // Check credentials
-            if (USERS[username] && USERS[username].password === password) {
-                currentUser = {
-                    username: username,
-                    name: USERS[username].name,
-                    role: USERS[username].role
+            try {
+                const response = await fetch(API_URL, {
+                    method: 'POST',
+                    mode: 'no-cors', // Important for cross-origin
+                    headers: {
+                        'Content-Type': 'text/plain'
+                    },
+                    body: JSON.stringify({
+                        action: 'authenticate',
+                        username: username,
+                        password: password
+                    })
+                });
+                
+                // Since no-cors mode doesn't return response body,
+                // we'll simulate authentication for now
+                // In production, you'd need to handle this differently
+                
+                // For demo: Check against known users
+                const validUsers = {
+                    'wigginsb': 'wig2866',
+                    'asberryw': 'asb0260',
+                    'parryw': 'par9666',
+                    'hribarc': 'hri0643'
                 };
                 
-                // Save to session
-                sessionStorage.setItem('currentUser', JSON.stringify(currentUser));
-                
-                // Show app
-                showApp();
-                showToast(`Welcome, ${currentUser.name}!`, 'success');
-            } else {
-                errorDiv.textContent = 'Invalid username or password';
-                errorDiv.style.display = 'block';
-            }
-            
-            // Re-enable button
-            loginBtn.disabled = false;
-            loginBtn.textContent = 'Sign In';
-        }
-        
-        function showApp() {
-            // Hide login
-            document.getElementById('loginScreen').style.display = 'none';
-            
-            // Show app
-            document.getElementById('appContainer').classList.add('active');
-            
-            // Update UI
-            document.getElementById('currentUser').textContent = currentUser.name;
-            
-            // Check if admin
-            if (currentUser.role === 'admin') {
-                document.getElementById('adminBadge').style.display = 'inline-block';
-                document.getElementById('adminDateSelector').style.display = 'block';
-            } else {
-                // For closet workers, check if today is Monday
-                const today = new Date();
-                if (today.getDay() !== 1) { // Not Monday
-                    showToast('Warning: Data entry is only available on Mondays for closet workers', 'warning');
-                    // Disable inputs for non-admin on non-Monday
-                    document.querySelectorAll('input, select, button').forEach(el => {
-                        if (!el.classList.contains('logout-btn')) {
-                            el.disabled = true;
-                        }
-                    });
+                if (validUsers[username] === password) {
+                    currentUser = { username, name: username };
+                    localStorage.setItem(STORAGE_KEYS.user, JSON.stringify(currentUser));
+                    showApp();
+                    showToast('Login successful!', 'success');
+                } else {
+                    showToast('Invalid credentials', 'error');
                 }
+                
+            } catch (error) {
+                console.error('Login error:', error);
+                showToast('Connection error. Please try again.', 'error');
+            } finally {
+                loginBtn.textContent = 'Sign In';
+                loginBtn.disabled = false;
             }
         }
         
+        // Show App
+        function showApp() {
+            document.getElementById('loginScreen').classList.add('hidden');
+            document.getElementById('appScreen').classList.add('active');
+            document.getElementById('currentUser').textContent = currentUser.name || currentUser.username;
+            
+            // Load initial data
+            loadDashboard();
+            loadPullTabGames();
+        }
+        
+        // Logout
         function logout() {
             if (confirm('Are you sure you want to logout?')) {
-                sessionStorage.removeItem('currentUser');
-                currentUser = null;
+                localStorage.removeItem(STORAGE_KEYS.user);
                 location.reload();
             }
         }
         
-        // ==================== CALCULATIONS ====================
-        function calculateTotals() {
-            let electronicTotal = 0;
-            let paperTotal = 0;
-            let miscTotal = 0;
+        // Tab Navigation
+        function showTab(tab) {
+            // Update tabs
+            document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+            event.target.classList.add('active');
             
-            document.querySelectorAll('.quantity-input').forEach(input => {
-                if (input.id === 'total_players') {
-                    document.getElementById('playersDisplay').textContent = input.value || '0';
-                    return;
-                }
-                
-                const quantity = parseInt(input.value) || 0;
-                const price = parseFloat(input.dataset.price) || 0;
-                const total = quantity * price;
-                
-                // Update item total
-                const totalEl = input.parentElement.querySelector('.item-total');
-                if (totalEl) {
-                    totalEl.textContent = `$${total.toFixed(2)}`;
-                }
-                
-                // Add to category totals
-                if (input.id.startsWith('elec_')) {
-                    electronicTotal += total;
-                } else if (input.id.startsWith('paper_')) {
-                    paperTotal += total;
-                } else if (input.id.startsWith('misc_')) {
-                    miscTotal += total;
-                }
-            });
-            
-            // Update displays
-            document.getElementById('electronicTotal').textContent = `$${electronicTotal}`;
-            document.getElementById('paperTotal').textContent = `$${paperTotal}`;
-            document.getElementById('miscTotal').textContent = `$${miscTotal}`;
-            document.getElementById('grandTotal').textContent = `$${(electronicTotal + paperTotal + miscTotal).toFixed(2)}`;
+            // Update sections
+            document.querySelectorAll('.content-section').forEach(s => s.classList.remove('active'));
+            document.getElementById(tab + 'Section').classList.add('active');
         }
         
-        // ==================== PULL TABS ====================
-        function addPullTabGame() {
-            pullTabCounter++;
-            const id = `pt_${pullTabCounter}`;
+        // Load Dashboard
+        async function loadDashboard() {
+            try {
+                // Fetch from API with GET request
+                const response = await fetch(API_URL + '?action=getDashboardStats');
+                const data = await response.json();
+                
+                if (data.success) {
+                    document.getElementById('todayRevenue').textContent = 
+                        '$' + (data.data.todaysRevenue || 0).toFixed(2);
+                    document.getElementById('playerCount').textContent = 
+                        data.data.totalPlayers || 0;
+                }
+            } catch (error) {
+                console.error('Dashboard load error:', error);
+                // Use cached data if available
+                const cached = localStorage.getItem(STORAGE_KEYS.cache);
+                if (cached) {
+                    const data = JSON.parse(cached);
+                    document.getElementById('todayRevenue').textContent = '$' + data.revenue;
+                    document.getElementById('playerCount').textContent = data.players;
+                }
+            }
+        }
+        
+        // Load Pull Tab Games
+        async function loadPullTabGames() {
+            try {
+                const response = await fetch(API_URL + '?action=getPullTabLibrary');
+                const data = await response.json();
+                
+                if (data.success && data.data) {
+                    pullTabGames = data.data;
+                    displayGames();
+                }
+            } catch (error) {
+                console.error('Games load error:', error);
+                // Use fallback data
+                pullTabGames = [
+                    { gameName: 'Race Horse Downs', formNumber: '354GA', topPrize: 250 },
+                    { gameName: 'Pot of Gold', formNumber: '7319D', topPrize: 140 },
+                    { gameName: 'Lucky 7s', formNumber: '3240', topPrize: 777 }
+                ];
+                displayGames();
+            }
+        }
+        
+        // Display Games
+        function displayGames() {
+            const gamesList = document.getElementById('gamesList');
+            const gameSelect = document.getElementById('gameSelect');
             
-            const html = `
-                <div class="pulltab-entry" id="${id}">
-                    <div class="pulltab-header">
-                        <strong>Game #${pullTabCounter}</strong>
-                        ${pullTabCounter > 1 ? `<button class="btn" onclick="removePullTab('${id}')">Remove</button>` : ''}
+            if (pullTabGames.length > 0) {
+                // Display game cards
+                gamesList.innerHTML = pullTabGames.map(game => `
+                    <div class="game-card" onclick="selectGame('${game.formNumber}')">
+                        <div>
+                            <div class="game-name">${game.gameName}</div>
+                            <div class="game-info">Form: ${game.formNumber}</div>
+                        </div>
+                        <div class="game-prize">$${game.topPrize}</div>
                     </div>
-                    <select class="game-selector" onchange="updatePullTabDetails('${id}', this.value)">
-                        <option value="">Select a game...</option>
-                        ${PULLTAB_GAMES.map(g => `<option value="${g.id}">${g.name}</option>`).join('')}
-                    </select>
-                    <div class="game-details" id="${id}_details"></div>
-                </div>
-            `;
-            
-            document.getElementById('pullTabsList').insertAdjacentHTML('beforeend', html);
+                `).join('');
+                
+                // Populate dropdown
+                gameSelect.innerHTML = '<option value="">Select a game...</option>' +
+                    pullTabGames.map(game => 
+                        `<option value="${game.formNumber}">${game.gameName} - $${game.topPrize}</option>`
+                    ).join('');
+            } else {
+                gamesList.innerHTML = '<p style="text-align: center; color: #666;">No games available</p>';
+                gameSelect.innerHTML = '<option value="">No games available</option>';
+            }
         }
         
-        function updatePullTabDetails(entryId, gameId) {
-            const game = PULLTAB_GAMES.find(g => g.id === gameId);
-            if (!game) return;
-            
-            const detailsHtml = `
-                <div class="detail-row">
-                    <span class="detail-label">Tickets:</span>
-                    <span class="detail-value">${game.tickets}</span>
-                </div>
-                <div class="detail-row">
-                    <span class="detail-label">Gross Sales:</span>
-                    <span class="detail-value">$${game.tickets * game.price}</span>
-                </div>
-                <div class="detail-row">
-                    <span class="detail-label">Prizes Paid:</span>
-                    <span class="detail-value">$${game.payout}</span>
-                </div>
-                <div class="detail-row">
-                    <span class="detail-label">Net Profit:</span>
-                    <span class="detail-value">$${game.profit}</span>
-                </div>
-            `;
-            
-            document.getElementById(`${entryId}_details`).innerHTML = detailsHtml;
-            calculatePullTabTotals();
+        // Select Game
+        function selectGame(formNumber) {
+            document.getElementById('gameSelect').value = formNumber;
+            showToast('Game selected', 'success');
         }
         
-        function removePullTab(id) {
-            document.getElementById(id).remove();
-            calculatePullTabTotals();
-        }
-        
-        function calculatePullTabTotals() {
-            let gross = 0, prizes = 0;
+        // Handle Door Sales
+        async function handleDoorSales(e) {
+            e.preventDefault();
             
-            document.querySelectorAll('.game-selector').forEach(select => {
-                const game = PULLTAB_GAMES.find(g => g.id === select.value);
-                if (game) {
-                    gross += game.tickets * game.price;
-                    prizes += game.payout;
-                }
-            });
-            
-            document.getElementById('ptGross').textContent = `$${gross}`;
-            document.getElementById('ptPrizes').textContent = `$${prizes}`;
-            document.getElementById('ptProfit').textContent = `$${gross - prizes}`;
-        }
-        
-        // ==================== DATA SAVING ====================
-        function updateOccasionDate() {
-            occasionData.date = document.getElementById('occasionDate').value;
-            showToast(`Occasion date set to ${occasionData.date}`, 'info');
-        }
-        
-        function saveOccasion() {
-            // Gather all data
-            const doorSalesData = {};
-            document.querySelectorAll('.quantity-input').forEach(input => {
-                if (input.value && input.value !== '0') {
-                    doorSalesData[input.id] = {
-                        quantity: parseInt(input.value) || 0,
-                        price: parseFloat(input.dataset.price) || 0
-                    };
-                }
-            });
-            
-            const pullTabsData = [];
-            document.querySelectorAll('.game-selector').forEach(select => {
-                if (select.value) {
-                    const game = PULLTAB_GAMES.find(g => g.id === select.value);
-                    if (game) {
-                        pullTabsData.push(game);
-                    }
-                }
-            });
-            
-            occasionData.doorSales = doorSalesData;
-            occasionData.pullTabs = pullTabsData;
-            occasionData.submittedBy = currentUser.username;
-            occasionData.submittedAt = new Date().toISOString();
-            
-            // Show the data (in production, this would be sent to server)
-            console.log('Saving occasion data:', occasionData);
-            
-            showToast('Occasion data saved successfully!', 'success');
-            
-            // In production, you would send this to your Google Apps Script
-            // saveToGoogleSheets(occasionData);
-        }
-        
-        // ==================== UTILITIES ====================
-        function showToast(message, type = 'info') {
-            const toast = document.getElementById('toast');
-            const icon = document.getElementById('toastIcon');
-            const msgEl = document.getElementById('toastMessage');
-            
-            msgEl.textContent = message;
-            toast.className = `toast ${type} show`;
-            
-            const icons = {
-                success: 'check_circle',
-                error: 'error',
-                warning: 'warning',
-                info: 'info'
+            const formData = {
+                date: document.getElementById('salesDate').value,
+                playerCount: document.getElementById('players').value,
+                paper6Face: document.getElementById('paper6Face').value,
+                paper9Solid: document.getElementById('paper9Solid').value,
+                paper9Stripe: document.getElementById('paper9Stripe').value,
+                paperEarlybird: document.getElementById('paperEarlybird').value,
+                elec40: document.getElementById('elec40').value,
+                elec65: document.getElementById('elec65').value,
+                daubers: document.getElementById('daubers').value,
+                session: 'evening',
+                worker: currentUser.username
             };
             
-            icon.textContent = icons[type] || 'info';
+            // Calculate total
+            const total = 
+                (parseInt(formData.paper6Face) * 10) +
+                (parseInt(formData.paper9Solid) * 15) +
+                (parseInt(formData.paper9Stripe) * 10) +
+                (parseInt(formData.paperEarlybird) * 2.5) +
+                (parseInt(formData.elec40) * 40) +
+                (parseInt(formData.elec65) * 65) +
+                (parseInt(formData.daubers) * 2);
+            
+            try {
+                // Save to API
+                await fetch(API_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: {
+                        'Content-Type': 'text/plain'
+                    },
+                    body: JSON.stringify({
+                        action: 'saveDoorSales',
+                        data: formData
+                    })
+                });
+                
+                showToast(`Door sales saved! Total: $${total.toFixed(2)}`, 'success');
+                
+                // Reset form
+                document.getElementById('doorSalesForm').reset();
+                setDefaultDate();
+                
+                // Update dashboard
+                loadDashboard();
+                
+            } catch (error) {
+                console.error('Save error:', error);
+                showToast('Error saving data. Please try again.', 'error');
+            }
+        }
+        
+        // Handle Pull Tabs
+        async function handlePullTabs(e) {
+            e.preventDefault();
+            
+            const formData = {
+                formNumber: document.getElementById('gameSelect').value,
+                serialNumber: document.getElementById('serialNumber').value,
+                startingTickets: document.getElementById('startTickets').value,
+                endingTickets: document.getElementById('endTickets').value,
+                prizesPaid: document.getElementById('prizesPaid').value,
+                worker: currentUser.username
+            };
+            
+            const ticketsSold = parseInt(formData.startingTickets) - parseInt(formData.endingTickets);
+            
+            try {
+                // Save to API
+                await fetch(API_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: {
+                        'Content-Type': 'text/plain'
+                    },
+                    body: JSON.stringify({
+                        action: 'recordPullTabSale',
+                        data: formData
+                    })
+                });
+                
+                showToast(`Pull tab sale recorded! ${ticketsSold} tickets sold`, 'success');
+                
+                // Reset form
+                document.getElementById('pullTabForm').reset();
+                
+                // Update dashboard
+                loadDashboard();
+                
+            } catch (error) {
+                console.error('Save error:', error);
+                showToast('Error saving data. Please try again.', 'error');
+            }
+        }
+        
+        // Utility Functions
+        function setDefaultDate() {
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('salesDate').value = today;
+        }
+        
+        function incrementField(fieldId) {
+            const field = document.getElementById(fieldId);
+            field.value = parseInt(field.value || 0) + 1;
+        }
+        
+        function showToast(message, type = 'success') {
+            const toast = document.getElementById('toast');
+            const icon = document.getElementById('toastIcon');
+            const msg = document.getElementById('toastMessage');
+            
+            msg.textContent = message;
+            toast.className = 'toast ' + type;
+            
+            if (type === 'success') {
+                icon.textContent = '✓';
+            } else if (type === 'error') {
+                icon.textContent = '✕';
+            } else {
+                icon.textContent = 'ℹ';
+            }
+            
+            toast.classList.add('show');
             
             setTimeout(() => {
                 toast.classList.remove('show');
             }, 3000);
         }
         
-        // Add first pull tab game on load
-        window.addEventListener('load', () => {
-            addPullTabGame();
-        });
+        // Service Worker Registration (for offline capability)
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('sw.js').catch(err => 
+                console.log('Service worker registration failed:', err)
+            );
+        }
     </script>
 </body>
 </html>
