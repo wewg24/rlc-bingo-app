@@ -2,332 +2,163 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>RLC Bingo Manager</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RLC Bingo Manager - Complete Mobile-Responsive System</title>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <meta name="theme-color" content="#667eea">
-    <meta name="apple-mobile-web-app-capable" content="yes">
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            -webkit-tap-highlight-color: transparent;
         }
         
         :root {
             --primary: #667eea;
-            --primary-dark: #764ba2;
-            --success: #66bb6a;
-            --warning: #ffa726;
-            --danger: #ef5350;
-            --text-primary: #333;
-            --text-secondary: #666;
+            --secondary: #764ba2;
+            --success: #4caf50;
+            --warning: #ff9800;
+            --danger: #f44336;
+            --info: #2196f3;
+            --dark: #333;
+            --light: #f5f5f5;
             --border: #e0e0e0;
-            --background: #f5f5f5;
-            --shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-            --shadow-lg: 0 4px 20px rgba(0, 0, 0, 0.15);
         }
         
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
             min-height: 100vh;
-            line-height: 1.6;
+            padding: 10px;
         }
         
-        /* Login Screen */
-        .login-container {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
         }
         
-        .login-container.hidden {
-            display: none;
-        }
-        
-        .login-card {
-            background: white;
-            border-radius: 20px;
-            padding: 40px 30px;
-            width: 100%;
-            max-width: 420px;
-            box-shadow: var(--shadow-lg);
-        }
-        
-        .app-logo {
-            text-align: center;
-            margin-bottom: 40px;
-        }
-        
-        .app-logo .icon {
-            font-size: 72px;
-            margin-bottom: 15px;
-            display: block;
-        }
-        
-        .app-logo h1 {
-            color: var(--text-primary);
-            font-size: 32px;
-            font-weight: 700;
-            margin-bottom: 8px;
-        }
-        
-        .app-logo p {
-            color: var(--text-secondary);
-            font-size: 16px;
-        }
-        
-        /* Form Elements */
-        .form-group {
-            margin-bottom: 24px;
-        }
-        
-        .form-label {
-            display: block;
-            margin-bottom: 8px;
-            color: var(--text-primary);
-            font-weight: 500;
-            font-size: 14px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-        
-        .form-input, .form-select {
-            width: 100%;
-            padding: 14px 16px;
-            border: 2px solid var(--border);
-            border-radius: 10px;
-            font-size: 16px;
-            transition: all 0.3s ease;
-            background: white;
-        }
-        
-        .form-input:focus, .form-select:focus {
-            outline: none;
-            border-color: var(--primary);
-            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
-        }
-        
-        .form-input:disabled {
-            background: #f9f9f9;
-            cursor: not-allowed;
-        }
-        
-        /* Buttons */
-        .btn {
-            padding: 14px 28px;
-            border: none;
-            border-radius: 10px;
-            font-size: 16px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            text-decoration: none;
-        }
-        
-        .btn-primary {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
-            color: white;
-            width: 100%;
-        }
-        
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
-        }
-        
-        .btn-primary:active {
-            transform: translateY(0);
-        }
-        
-        .btn-secondary {
-            background: white;
-            color: var(--primary);
-            border: 2px solid var(--primary);
-        }
-        
-        .btn-secondary:hover {
-            background: var(--primary);
-            color: white;
-        }
-        
-        .btn-success {
-            background: var(--success);
-            color: white;
-        }
-        
-        .btn-danger {
-            background: var(--danger);
-            color: white;
-        }
-        
-        .btn-sm {
-            padding: 8px 16px;
-            font-size: 14px;
-        }
-        
-        /* Main App Container */
-        .app-container {
-            display: none;
-            min-height: 100vh;
-            background: var(--background);
-        }
-        
-        .app-container.active {
-            display: block;
+        /* Mobile-First Design */
+        @media (max-width: 768px) {
+            body {
+                padding: 5px;
+            }
+            
+            .header {
+                padding: 15px !important;
+            }
+            
+            .logo {
+                font-size: 18px !important;
+            }
+            
+            .nav-tabs {
+                flex-direction: column;
+                padding: 5px !important;
+            }
+            
+            .nav-tab {
+                width: 100%;
+                justify-content: center;
+                padding: 15px !important;
+            }
+            
+            .form-grid {
+                grid-template-columns: 1fr !important;
+            }
+            
+            .stats-grid {
+                grid-template-columns: 1fr 1fr !important;
+            }
+            
+            .game-prize-grid {
+                grid-template-columns: 1fr !important;
+            }
         }
         
         /* Header */
-        .app-header {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
-            color: white;
-            padding: 16px 20px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            position: sticky;
-            top: 0;
-            z-index: 100;
+        .header {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
         }
         
         .header-content {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-        
-        .header-left {
-            display: flex;
-            align-items: center;
+            flex-wrap: wrap;
             gap: 15px;
         }
         
-        .header-title {
-            font-size: 20px;
-            font-weight: 600;
+        .logo {
             display: flex;
             align-items: center;
             gap: 10px;
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--dark);
         }
         
-        .header-title .icon {
-            font-size: 28px;
-        }
-        
-        .header-user {
+        .session-info {
             display: flex;
+            gap: 10px;
             align-items: center;
-            gap: 15px;
+            flex-wrap: wrap;
         }
         
-        .user-info {
-            text-align: right;
-        }
-        
-        .user-name {
-            font-weight: 600;
-            font-size: 14px;
-        }
-        
-        .user-role {
+        .session-badge {
+            padding: 8px 12px;
+            background: #e3f2fd;
+            border-radius: 8px;
             font-size: 12px;
-            opacity: 0.8;
-            text-transform: uppercase;
+            color: #1976d2;
         }
         
-        .btn-logout {
-            background: rgba(255, 255, 255, 0.2);
-            color: white;
-            padding: 8px 16px;
+        /* Navigation */
+        .nav-tabs {
+            background: white;
+            border-radius: 12px;
+            padding: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            display: flex;
+            gap: 5px;
+            flex-wrap: wrap;
+        }
+        
+        .nav-tab {
+            padding: 12px 20px;
+            background: transparent;
             border: none;
             border-radius: 8px;
             cursor: pointer;
             font-size: 14px;
-            transition: background 0.3s;
-        }
-        
-        .btn-logout:hover {
-            background: rgba(255, 255, 255, 0.3);
-        }
-        
-        /* Navigation */
-        .nav-container {
-            background: white;
-            border-bottom: 1px solid var(--border);
-            position: sticky;
-            top: 68px;
-            z-index: 90;
-        }
-        
-        .nav-tabs {
-            display: flex;
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 0 20px;
-            overflow-x: auto;
-            -webkit-overflow-scrolling: touch;
-        }
-        
-        .nav-tab {
-            padding: 16px 24px;
-            background: none;
-            border: none;
-            cursor: pointer;
-            font-size: 15px;
-            color: var(--text-secondary);
-            position: relative;
+            color: #666;
             transition: all 0.3s;
-            white-space: nowrap;
             display: flex;
             align-items: center;
             gap: 8px;
+            white-space: nowrap;
         }
         
         .nav-tab:hover {
-            color: var(--text-primary);
+            background: var(--light);
         }
         
         .nav-tab.active {
-            color: var(--primary);
-            font-weight: 600;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
         }
         
-        .nav-tab.active::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: var(--primary);
-        }
-        
-        .nav-tab .material-icons {
-            font-size: 20px;
-        }
-        
-        /* Content Area */
-        .content-container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 30px 20px;
-        }
-        
+        /* Content */
         .content-section {
             display: none;
+            animation: fadeIn 0.5s;
         }
         
         .content-section.active {
             display: block;
-            animation: fadeIn 0.3s ease;
         }
         
         @keyframes fadeIn {
@@ -335,1496 +166,1571 @@
             to { opacity: 1; transform: translateY(0); }
         }
         
-        /* Cards */
-        .card {
+        /* Forms */
+        .form-card {
             background: white;
             border-radius: 12px;
-            padding: 24px;
-            margin-bottom: 24px;
-            box-shadow: var(--shadow);
-        }
-        
-        .card-header {
-            font-size: 20px;
-            font-weight: 600;
-            color: var(--text-primary);
-            margin-bottom: 20px;
-            padding-bottom: 12px;
-            border-bottom: 2px solid var(--background);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .card-header .helper-text {
-            font-size: 14px;
-            font-weight: normal;
-            color: var(--text-secondary);
-        }
-        
-        /* Dashboard Stats */
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-            margin-bottom: 30px;
-        }
-        
-        .stat-card {
-            background: white;
-            padding: 24px;
-            border-radius: 12px;
-            box-shadow: var(--shadow);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .stat-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: linear-gradient(90deg, var(--primary) 0%, var(--primary-dark) 100%);
-        }
-        
-        .stat-icon {
-            position: absolute;
-            right: 20px;
-            top: 20px;
-            font-size: 48px;
-            color: var(--border);
-            opacity: 0.5;
-        }
-        
-        .stat-value {
-            font-size: 32px;
-            font-weight: bold;
-            color: var(--text-primary);
-            margin-bottom: 4px;
-        }
-        
-        .stat-label {
-            font-size: 13px;
-            color: var(--text-secondary);
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-        
-        /* Door Sales Form (Occasion Recording) */
-        .occasion-form {
-            display: grid;
-            gap: 30px;
-        }
-        
-        .form-section {
-            background: var(--background);
             padding: 20px;
-            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .form-header {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--dark);
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--border);
         }
         
         .form-section-title {
             font-size: 16px;
             font-weight: 600;
-            color: var(--text-primary);
-            margin-bottom: 15px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
+            color: var(--dark);
+            margin: 20px 0 15px 0;
+            padding: 10px;
+            background: var(--light);
+            border-radius: 8px;
         }
         
         .form-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
+            gap: 15px;
+            margin-bottom: 20px;
         }
         
-        .quantity-input {
+        .form-group {
             display: flex;
-            align-items: center;
-            gap: 10px;
+            flex-direction: column;
         }
         
-        .quantity-label {
-            flex: 1;
+        .form-label {
+            font-size: 13px;
+            color: #666;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+        
+        .form-input, .form-select, .form-textarea {
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
             font-size: 14px;
-            color: var(--text-primary);
+            transition: border-color 0.3s;
+            width: 100%;
         }
         
-        .quantity-price {
-            font-size: 12px;
-            color: var(--text-secondary);
-            margin-left: 5px;
+        .form-input:focus, .form-select:focus, .form-textarea:focus {
+            outline: none;
+            border-color: var(--primary);
         }
         
-        .quantity-field {
-            width: 80px;
-            padding: 8px;
+        .form-input[readonly] {
+            background: var(--light);
+            cursor: not-allowed;
+        }
+        
+        /* Progressive Games Section */
+        .progressive-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+        
+        .progressive-card {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 15px;
             border: 2px solid var(--border);
-            border-radius: 6px;
+        }
+        
+        .progressive-title {
+            font-weight: 600;
+            color: var(--dark);
+            margin-bottom: 15px;
+            font-size: 16px;
+            text-align: center;
+        }
+        
+        /* Special Games Grid */
+        .special-games-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .special-game-card {
+            background: white;
+            border: 2px solid var(--primary);
+            border-radius: 12px;
+            padding: 15px;
+        }
+        
+        .special-game-title {
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 10px;
             text-align: center;
             font-size: 16px;
-            font-weight: 600;
         }
         
-        .quantity-field:focus {
-            border-color: var(--primary);
-            outline: none;
+        /* Pull Tab Entry Section */
+        .pull-tab-entry {
+            background: #e8f5e9;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
         }
         
-        /* Pull Tab Recording */
-        .pulltab-list {
-            margin-bottom: 30px;
+        /* Cash Summary Cards */
+        .cash-summary {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
         }
         
-        .pulltab-item {
+        .cash-card {
             background: white;
-            border: 2px solid var(--border);
+            border-radius: 12px;
+            padding: 15px;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .cash-label {
+            font-size: 12px;
+            color: #666;
+            margin-bottom: 8px;
+        }
+        
+        .cash-amount {
+            font-size: 24px;
+            font-weight: 700;
+        }
+        
+        .amount-positive { color: var(--success); }
+        .amount-negative { color: var(--danger); }
+        .amount-neutral { color: var(--dark); }
+        
+        /* Buttons */
+        .btn {
+            padding: 12px 24px;
+            border: none;
             border-radius: 8px;
-            padding: 16px;
-            margin-bottom: 12px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+            font-size: 14px;
+            font-weight: 500;
             cursor: pointer;
             transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            white-space: nowrap;
         }
         
-        .pulltab-item:hover {
-            border-color: var(--primary);
-            box-shadow: var(--shadow);
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
         }
         
-        .pulltab-item.selected {
-            border-color: var(--primary);
-            background: rgba(102, 126, 234, 0.05);
+        .btn-success { background: var(--success); color: white; }
+        .btn-warning { background: var(--warning); color: white; }
+        .btn-danger { background: var(--danger); color: white; }
+        .btn-info { background: var(--info); color: white; }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
         }
         
-        .pulltab-info {
-            flex: 1;
-        }
-        
-        .pulltab-fullname {
-            font-weight: 600;
-            color: var(--text-primary);
-            margin-bottom: 4px;
-        }
-        
-        .pulltab-details {
-            font-size: 13px;
-            color: var(--text-secondary);
-        }
-        
-        .pulltab-prize {
-            font-size: 24px;
-            font-weight: bold;
-            color: var(--primary);
-        }
-        
-        /* Auto-populated Fields */
-        .auto-fields {
-            background: rgba(102, 126, 234, 0.05);
-            padding: 20px;
-            border-radius: 8px;
+        .btn-group {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
             margin-top: 20px;
         }
         
-        .auto-fields .form-grid {
-            gap: 15px;
-        }
-        
-        .auto-field-group {
-            display: flex;
-            flex-direction: column;
-            gap: 5px;
-        }
-        
-        .auto-field-label {
-            font-size: 12px;
-            color: var(--text-secondary);
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-        
-        .auto-field-value {
-            font-size: 18px;
+        /* Status Indicators */
+        .status-indicator {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 11px;
             font-weight: 600;
-            color: var(--text-primary);
+            text-transform: uppercase;
         }
         
-        /* Manual Game Entry Modal */
-        .modal {
-            display: none;
+        .status-active { background: #c8e6c9; color: #2e7d32; }
+        .status-complete { background: #bbdefb; color: #1565c0; }
+        .status-pending { background: #fff9c4; color: #f57f17; }
+        
+        /* Toast Notifications */
+        .toast-container {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 9999;
+            pointer-events: none;
+        }
+        
+        .toast {
+            background: white;
+            border-radius: 8px;
+            padding: 16px;
+            margin-bottom: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            animation: slideIn 0.3s;
+            pointer-events: auto;
+            max-width: 350px;
+        }
+        
+        @keyframes slideIn {
+            from { transform: translateX(400px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        
+        .toast-success { border-left: 4px solid var(--success); }
+        .toast-error { border-left: 4px solid var(--danger); }
+        .toast-warning { border-left: 4px solid var(--warning); }
+        .toast-info { border-left: 4px solid var(--info); }
+        
+        /* Loading Overlay */
+        .loading-overlay {
             position: fixed;
             top: 0;
             left: 0;
             right: 0;
             bottom: 0;
-            background: rgba(0, 0, 0, 0.6);
-            z-index: 1000;
-            align-items: center;
+            background: rgba(0,0,0,0.7);
+            display: none;
             justify-content: center;
-            padding: 20px;
-        }
-        
-        .modal.active {
-            display: flex;
-        }
-        
-        .modal-content {
-            background: white;
-            border-radius: 16px;
-            max-width: 600px;
-            width: 100%;
-            max-height: 90vh;
-            overflow-y: auto;
-        }
-        
-        .modal-header {
-            padding: 24px 24px 16px;
-            border-bottom: 1px solid var(--border);
-        }
-        
-        .modal-title {
-            font-size: 22px;
-            font-weight: 600;
-            color: var(--text-primary);
-        }
-        
-        .modal-body {
-            padding: 24px;
-        }
-        
-        .modal-footer {
-            padding: 16px 24px 24px;
-            display: flex;
-            justify-content: flex-end;
-            gap: 12px;
-        }
-        
-        /* Tables */
-        .data-table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-        
-        .data-table th {
-            background: var(--background);
-            padding: 12px;
-            text-align: left;
-            font-weight: 600;
-            color: var(--text-primary);
-            font-size: 13px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            border-bottom: 2px solid var(--border);
-        }
-        
-        .data-table td {
-            padding: 12px;
-            border-bottom: 1px solid var(--border);
-            color: var(--text-primary);
-        }
-        
-        .data-table tr:hover {
-            background: var(--background);
-        }
-        
-        /* Badge */
-        .badge {
-            display: inline-block;
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 11px;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-        
-        .badge.active {
-            background: #e8f5e9;
-            color: #2e7d32;
-        }
-        
-        .badge.inactive {
-            background: #ffebee;
-            color: #c62828;
-        }
-        
-        .badge.admin {
-            background: #e8eaf6;
-            color: #3f51b5;
-        }
-        
-        .badge.closet {
-            background: #f3e5f5;
-            color: #9c27b0;
-        }
-        
-        /* Success/Error Messages */
-        .alert {
-            padding: 16px 20px;
-            border-radius: 8px;
-            margin-bottom: 20px;
-            display: flex;
             align-items: center;
-            gap: 12px;
+            z-index: 9998;
         }
         
-        .alert.success {
-            background: #e8f5e9;
-            color: #2e7d32;
-            border-left: 4px solid #4caf50;
-        }
-        
-        .alert.error {
-            background: #ffebee;
-            color: #c62828;
-            border-left: 4px solid #f44336;
-        }
-        
-        .alert .material-icons {
-            font-size: 24px;
-        }
-        
-        /* Loading Spinner */
-        .loading {
+        .loading-content {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
             text-align: center;
-            padding: 40px;
-            color: var(--text-secondary);
         }
         
         .spinner {
-            display: inline-block;
-            width: 40px;
-            height: 40px;
-            border: 4px solid var(--border);
+            width: 50px;
+            height: 50px;
+            border: 4px solid var(--light);
             border-top-color: var(--primary);
             border-radius: 50%;
             animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
         }
         
         @keyframes spin {
             to { transform: rotate(360deg); }
         }
         
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .header-content {
-                flex-direction: column;
-                gap: 15px;
-                text-align: center;
-            }
-            
-            .nav-tabs {
-                padding: 0;
-                overflow-x: auto;
-            }
-            
-            .nav-tab {
-                padding: 14px 16px;
-                font-size: 14px;
-            }
-            
-            .nav-tab .material-icons {
-                display: none;
-            }
-            
-            .stats-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .form-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .modal-content {
-                margin: 20px;
-            }
-            
-            .data-table {
-                font-size: 14px;
-            }
-            
-            .data-table th, .data-table td {
-                padding: 8px;
-            }
+        /* Responsive Tables */
+        .table-responsive {
+            overflow-x: auto;
+            margin: 20px 0;
         }
         
-        @media (max-width: 480px) {
-            .login-card {
-                padding: 30px 20px;
-            }
-            
-            .app-logo h1 {
-                font-size: 28px;
-            }
-            
-            .content-container {
-                padding: 20px 15px;
-            }
-            
-            .card {
-                padding: 16px;
-            }
-            
-            .pulltab-item {
-                flex-direction: column;
-                text-align: center;
-                gap: 10px;
-            }
-            
-            .quantity-field {
-                width: 60px;
-            }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        th {
+            background: var(--light);
+            font-weight: 600;
+            color: var(--dark);
+        }
+        
+        tr:hover {
+            background: #fafafa;
         }
         
         /* Print Styles */
         @media print {
-            .app-header, .nav-container, .btn-logout {
-                display: none;
-            }
-            
-            .content-container {
+            body {
+                background: white;
                 padding: 0;
             }
             
-            .card {
+            .nav-tabs, .btn, .header {
+                display: none !important;
+            }
+            
+            .form-card {
                 box-shadow: none;
-                border: 1px solid #ccc;
-                page-break-inside: avoid;
+                border: 1px solid #000;
+                break-inside: avoid;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Configuration -->
-    <script>
-        // IMPORTANT: Update this with your Google Apps Script Web App URL
-        const API_URL = 'https://script.google.com/macros/s/AKfycbyAo1IsuFempsKZ3pE9fbxFImbFI-Ff2fpn6DJZEhlLXpkFrQJo6cdvyoOj4T1QkHmskg/exec';
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <div class="header-content">
+                <div class="logo">
+                    <span style="font-size: 32px;">🦁</span>
+                    <span>RLC Bingo Manager</span>
+                </div>
+                <div class="session-info">
+                    <div class="session-badge" id="currentDate"></div>
+                    <div class="session-badge" id="currentSession">No Active Session</div>
+                    <div class="session-badge" id="currentUser">Guest</div>
+                </div>
+            </div>
+        </div>
         
-        // Application state
-        let currentUser = null;
-        let currentRole = null;
-        let pullTabLibrary = [];
-        let selectedGame = null;
+        <!-- Navigation -->
+        <div class="nav-tabs">
+            <button class="nav-tab active" onclick="switchTab('dashboard')">
+                <i class="material-icons">dashboard</i> Dashboard
+            </button>
+            <button class="nav-tab" onclick="switchTab('bingoOccasion')">
+                <i class="material-icons">event</i> Bingo Occasion
+            </button>
+            <button class="nav-tab" onclick="switchTab('pullTabs')">
+                <i class="material-icons">confirmation_number</i> Pull-Tabs
+            </button>
+            <button class="nav-tab" onclick="switchTab('cashClose')">
+                <i class="material-icons">account_balance_wallet</i> Cash Close
+            </button>
+            <button class="nav-tab" onclick="switchTab('reports')">
+                <i class="material-icons">assessment</i> Reports
+            </button>
+        </div>
         
-        // Door Sales Products Configuration (Admin-maintained prices)
-        const DOOR_SALES_PRODUCTS = {
-            paper: {
-                '6face': { name: '6 Face Packet', price: 10 },
-                '9solid': { name: '9 on Solid Border', price: 15 },
-                '9stripe': { name: '9 on Stripe Border', price: 10 },
-                'earlybird': { name: 'Early Bird Special', price: 2.50 },
-                'progressive18': { name: '18 Face Progressive', price: 5 },
-                'progressive3': { name: '3 on Progressive', price: 1 }
-            },
-            electronic: {
-                'elec40': { name: 'Electronic Package', price: 40 },
-                'elec65': { name: 'Electronic Premium', price: 65 }
-            },
-            misc: {
-                'daubers': { name: 'Daubers', price: 2 }
-            }
-        };
-    </script>
-
-    <!-- Login Screen -->
-    <div class="login-container" id="loginScreen">
-        <div class="login-card">
-            <div class="app-logo">
-                <span class="icon">🦁</span>
-                <h1>RLC Bingo Manager</h1>
-                <p>Occasion Recording System</p>
+        <!-- Dashboard Section -->
+        <div class="content-section active" id="dashboardSection">
+            <div class="cash-summary">
+                <div class="cash-card">
+                    <div class="cash-label">Today's Sessions</div>
+                    <div class="cash-amount amount-neutral" id="sessionsCount">0</div>
+                </div>
+                <div class="cash-card">
+                    <div class="cash-label">Total Players</div>
+                    <div class="cash-amount amount-neutral" id="playersCount">0</div>
+                </div>
+                <div class="cash-card">
+                    <div class="cash-label">Gross Receipts</div>
+                    <div class="cash-amount amount-positive" id="grossReceipts">$0.00</div>
+                </div>
+                <div class="cash-card">
+                    <div class="cash-label">Net Profit</div>
+                    <div class="cash-amount amount-positive" id="netProfit">$0.00</div>
+                </div>
             </div>
             
-            <form id="loginForm" onsubmit="handleLogin(event)">
-                <div class="form-group">
-                    <label class="form-label">Username</label>
-                    <input type="text" class="form-input" id="username" required autocomplete="username">
-                </div>
-                
-                <div class="form-group">
-                    <label class="form-label">Password</label>
-                    <input type="password" class="form-input" id="password" required autocomplete="current-password">
-                </div>
-                
-                <button type="submit" class="btn btn-primary" id="loginBtn">
-                    <i class="material-icons">login</i>
-                    Sign In
-                </button>
-            </form>
-        </div>
-    </div>
-
-    <!-- Main Application -->
-    <div class="app-container" id="appContainer">
-        <!-- Header -->
-        <header class="app-header">
-            <div class="header-content">
-                <div class="header-left">
-                    <div class="header-title">
-                        <span class="icon">🦁</span>
-                        <span>RLC Bingo Manager</span>
-                    </div>
-                </div>
-                <div class="header-user">
-                    <div class="user-info">
-                        <div class="user-name" id="userName">Loading...</div>
-                        <div class="user-role" id="userRole">...</div>
-                    </div>
-                    <button class="btn-logout" onclick="logout()">
-                        <i class="material-icons">logout</i>
-                        Logout
+            <div class="form-card">
+                <div class="form-header">Quick Actions</div>
+                <div class="btn-group">
+                    <button class="btn btn-primary" onclick="startNewOccasion()">
+                        <i class="material-icons">add_circle</i> New Occasion
+                    </button>
+                    <button class="btn btn-success" onclick="switchTab('bingoOccasion')">
+                        <i class="material-icons">point_of_sale</i> Door Sales
+                    </button>
+                    <button class="btn btn-warning" onclick="switchTab('pullTabs')">
+                        <i class="material-icons">local_activity</i> Pull-Tabs
+                    </button>
+                    <button class="btn btn-info" onclick="loadRecentActivity()">
+                        <i class="material-icons">refresh</i> Refresh
                     </button>
                 </div>
             </div>
-        </header>
-
-        <!-- Navigation -->
-        <nav class="nav-container">
-            <div class="nav-tabs" id="navTabs">
-                <!-- Navigation tabs will be dynamically generated based on user role -->
-            </div>
-        </nav>
-
-        <!-- Content Area -->
-        <main class="content-container">
-            <!-- Dashboard Section (Admin & Closet) -->
-            <div class="content-section" id="dashboardSection">
-                <div class="stats-grid">
-                    <div class="stat-card">
-                        <i class="material-icons stat-icon">attach_money</i>
-                        <div class="stat-value">$<span id="todayRevenue">0.00</span></div>
-                        <div class="stat-label">Today's Total</div>
-                    </div>
-                    <div class="stat-card">
-                        <i class="material-icons stat-icon">people</i>
-                        <div class="stat-value" id="totalPlayers">0</div>
-                        <div class="stat-label">Players Recorded</div>
-                    </div>
-                    <div class="stat-card">
-                        <i class="material-icons stat-icon">local_offer</i>
-                        <div class="stat-value" id="gamesPlayed">0</div>
-                        <div class="stat-label">Games Played Today</div>
-                    </div>
-                    <div class="stat-card">
-                        <i class="material-icons stat-icon">trending_up</i>
-                        <div class="stat-value">$<span id="weekTotal">0.00</span></div>
-                        <div class="stat-label">Week Total</div>
-                    </div>
-                </div>
-                
-                <div class="card">
-                    <div class="card-header">
-                        Quick Actions
-                        <span class="helper-text">Select an action to begin</span>
-                    </div>
-                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px;">
-                        <button class="btn btn-primary" onclick="navigateToSection('doorSales')">
-                            <i class="material-icons">point_of_sale</i>
-                            Record Door Sales
-                        </button>
-                        <button class="btn btn-primary" onclick="navigateToSection('pullTabs')">
-                            <i class="material-icons">confirmation_number</i>
-                            Record Pull Tabs
-                        </button>
-                        <button class="btn btn-secondary admin-only" style="display:none" onclick="generateReport()">
-                            <i class="material-icons">assessment</i>
-                            Generate Reports
-                        </button>
-                        <button class="btn btn-secondary admin-only" style="display:none" onclick="navigateToSection('users')">
-                            <i class="material-icons">people</i>
-                            Manage Users
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Door Sales Recording Section -->
-            <div class="content-section" id="doorSalesSection">
-                <div class="card">
-                    <div class="card-header">
-                        Door Sales Recording
-                        <span class="helper-text">Enter quantities from POS summary</span>
-                    </div>
-                    
-                    <form id="doorSalesForm" onsubmit="saveDoorSales(event)">
-                        <div class="form-section">
-                            <div class="form-section-title">Occasion Information</div>
-                            <div class="form-grid">
-                                <div class="form-group">
-                                    <label class="form-label">Date</label>
-                                    <input type="date" class="form-input" id="occasionDate" required>
-                                </div>
-                                <div class="form-group">
-                                    <label class="form-label">Session</label>
-                                    <select class="form-select" id="sessionType" required>
-                                        <option value="afternoon">Afternoon</option>
-                                        <option value="evening" selected>Evening</option>
-                                        <option value="special">Special Event</option>
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label class="form-label">Player Count</label>
-                                    <input type="number" class="form-input" id="playerCount" min="0" required>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="form-section">
-                            <div class="form-section-title">Paper Sales</div>
-                            <div class="form-grid">
-                                <div class="quantity-input">
-                                    <span class="quantity-label">
-                                        6 Face Packet
-                                        <span class="quantity-price">($10.00)</span>
-                                    </span>
-                                    <input type="number" class="quantity-field" id="paper6face" min="0" value="0">
-                                </div>
-                                <div class="quantity-input">
-                                    <span class="quantity-label">
-                                        9 on Solid Border
-                                        <span class="quantity-price">($15.00)</span>
-                                    </span>
-                                    <input type="number" class="quantity-field" id="paper9solid" min="0" value="0">
-                                </div>
-                                <div class="quantity-input">
-                                    <span class="quantity-label">
-                                        9 on Stripe Border
-                                        <span class="quantity-price">($10.00)</span>
-                                    </span>
-                                    <input type="number" class="quantity-field" id="paper9stripe" min="0" value="0">
-                                </div>
-                                <div class="quantity-input">
-                                    <span class="quantity-label">
-                                        Early Bird Special
-                                        <span class="quantity-price">($2.50)</span>
-                                    </span>
-                                    <input type="number" class="quantity-field" id="paperearlybird" min="0" value="0">
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="form-section">
-                            <div class="form-section-title">Electronic & Miscellaneous</div>
-                            <div class="form-grid">
-                                <div class="quantity-input">
-                                    <span class="quantity-label">
-                                        Electronic Package
-                                        <span class="quantity-price">($40.00)</span>
-                                    </span>
-                                    <input type="number" class="quantity-field" id="elec40" min="0" value="0">
-                                </div>
-                                <div class="quantity-input">
-                                    <span class="quantity-label">
-                                        Electronic Premium
-                                        <span class="quantity-price">($65.00)</span>
-                                    </span>
-                                    <input type="number" class="quantity-field" id="elec65" min="0" value="0">
-                                </div>
-                                <div class="quantity-input">
-                                    <span class="quantity-label">
-                                        Daubers
-                                        <span class="quantity-price">($2.00)</span>
-                                    </span>
-                                    <input type="number" class="quantity-field" id="daubers" min="0" value="0">
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 30px;">
-                            <div style="font-size: 20px; font-weight: 600;">
-                                Total: $<span id="doorSalesTotal">0.00</span>
-                            </div>
-                            <button type="submit" class="btn btn-primary">
-                                <i class="material-icons">save</i>
-                                Save Door Sales
-                            </button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-
-            <!-- Pull Tabs Recording Section -->
-            <div class="content-section" id="pullTabsSection">
-                <div class="card">
-                    <div class="card-header">
-                        Pull Tab Recording
-                        <button class="btn btn-secondary btn-sm" onclick="showManualEntryModal()">
-                            <i class="material-icons">add</i>
-                            Add Unlisted Game
-                        </button>
-                    </div>
-                    
-                    <div class="form-section">
-                        <div class="form-section-title">Select Game Played</div>
-                        <div class="pulltab-list" id="pullTabList">
-                            <div class="loading">
-                                <div class="spinner"></div>
-                                <p>Loading pull tab library...</p>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <form id="pullTabForm" onsubmit="savePullTab(event)" style="display: none;">
-                        <div class="form-section">
-                            <div class="form-section-title">Game Details</div>
-                            <div class="form-grid">
-                                <div class="form-group">
-                                    <label class="form-label">Serial Number</label>
-                                    <input type="text" class="form-input" id="serialNumber" required>
-                                </div>
-                                <div class="form-group">
-                                    <label class="form-label">Starting Tickets</label>
-                                    <input type="number" class="form-input" id="startingTickets" min="0" required>
-                                </div>
-                                <div class="form-group">
-                                    <label class="form-label">Ending Tickets</label>
-                                    <input type="number" class="form-input" id="endingTickets" min="0" required onchange="calculatePullTabValues()">
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="auto-fields">
-                            <div class="form-section-title">Auto-Calculated Values (Editable)</div>
-                            <div class="form-grid">
-                                <div class="form-group">
-                                    <label class="form-label">Tickets Sold</label>
-                                    <input type="number" class="form-input" id="ticketsSold" readonly style="background: #f9f9f9;">
-                                </div>
-                                <div class="form-group">
-                                    <label class="form-label">Price Per Ticket</label>
-                                    <input type="number" class="form-input" id="pricePerTicket" step="0.01" required>
-                                </div>
-                                <div class="form-group">
-                                    <label class="form-label">Gross Sales</label>
-                                    <input type="number" class="form-input" id="grossSales" step="0.01" required>
-                                </div>
-                                <div class="form-group">
-                                    <label class="form-label">Prizes Paid</label>
-                                    <input type="number" class="form-input" id="prizesPaid" step="0.01" required>
-                                </div>
-                                <div class="form-group">
-                                    <label class="form-label">Net Profit</label>
-                                    <input type="number" class="form-input" id="netProfit" readonly style="background: #f9f9f9;">
-                                </div>
-                                <div class="form-group">
-                                    <label class="form-label">Ideal Profit</label>
-                                    <input type="number" class="form-input" id="idealProfit" step="0.01" required>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div style="display: flex; justify-content: flex-end; gap: 12px; margin-top: 30px;">
-                            <button type="button" class="btn btn-secondary" onclick="clearPullTabForm()">
-                                Cancel
-                            </button>
-                            <button type="submit" class="btn btn-primary">
-                                <i class="material-icons">save</i>
-                                Save Pull Tab Record
-                            </button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-
-            <!-- Users Management Section (Admin Only) -->
-            <div class="content-section" id="usersSection">
-                <div class="card">
-                    <div class="card-header">
-                        User Management
-                        <button class="btn btn-primary btn-sm" onclick="showAddUserModal()">
-                            <i class="material-icons">person_add</i>
-                            Add User
-                        </button>
-                    </div>
-                    
-                    <table class="data-table">
+            
+            <div class="form-card">
+                <div class="form-header">Recent Activity</div>
+                <div class="table-responsive">
+                    <table id="activityTable">
                         <thead>
                             <tr>
-                                <th>Username</th>
-                                <th>Name</th>
-                                <th>Role</th>
-                                <th>Email</th>
+                                <th>Date/Time</th>
+                                <th>Session</th>
+                                <th>Type</th>
+                                <th>Amount</th>
                                 <th>Status</th>
-                                <th>Last Login</th>
-                                <th>Actions</th>
                             </tr>
                         </thead>
-                        <tbody id="usersTableBody">
+                        <tbody id="activityBody">
                             <tr>
-                                <td colspan="7" class="loading">
-                                    <div class="spinner"></div>
-                                    <p>Loading users...</p>
-                                </td>
+                                <td colspan="5" style="text-align: center;">Loading...</td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
             </div>
-
-            <!-- Reports Section (Admin Only) -->
-            <div class="content-section" id="reportsSection">
-                <div class="card">
-                    <div class="card-header">Generate Reports</div>
-                    
-                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px;">
-                        <button class="btn btn-primary" onclick="openReport('daily')">
-                            <i class="material-icons">today</i>
-                            Daily Summary
-                        </button>
-                        <button class="btn btn-primary" onclick="openReport('weekly')">
-                            <i class="material-icons">date_range</i>
-                            Weekly Report
-                        </button>
-                        <button class="btn btn-primary" onclick="openReport('monthly')">
-                            <i class="material-icons">calendar_month</i>
-                            Monthly Report
-                        </button>
-                        <button class="btn btn-primary" onclick="openReport('mgc')">
-                            <i class="material-icons">account_balance</i>
-                            MGC Compliance
-                        </button>
-                        <button class="btn btn-primary" onclick="openReport('occasion')">
-                            <i class="material-icons">event</i>
-                            Occasion Analysis
-                        </button>
-                        <button class="btn btn-primary" onclick="openReport('pulltab')">
-                            <i class="material-icons">local_offer</i>
-                            Pull Tab Performance
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Settings Section (Admin Only) -->
-            <div class="content-section" id="settingsSection">
-                <div class="card">
-                    <div class="card-header">System Settings</div>
-                    
-                    <div class="form-section">
-                        <div class="form-section-title">Product Pricing</div>
-                        <p style="color: var(--text-secondary); margin-bottom: 20px;">
-                            Update product prices here. Changes will apply to future recordings.
-                        </p>
-                        
-                        <div class="form-grid">
-                            <div class="form-group">
-                                <label class="form-label">6 Face Packet</label>
-                                <input type="number" class="form-input" value="10.00" step="0.01">
-                            </div>
-                            <div class="form-group">
-                                <label class="form-label">9 on Solid Border</label>
-                                <input type="number" class="form-input" value="15.00" step="0.01">
-                            </div>
-                            <div class="form-group">
-                                <label class="form-label">9 on Stripe Border</label>
-                                <input type="number" class="form-input" value="10.00" step="0.01">
-                            </div>
-                            <div class="form-group">
-                                <label class="form-label">Early Bird Special</label>
-                                <input type="number" class="form-input" value="2.50" step="0.01">
-                            </div>
-                        </div>
-                        
-                        <button class="btn btn-primary" onclick="saveSettings()">
-                            <i class="material-icons">save</i>
-                            Save Settings
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </main>
-    </div>
-
-    <!-- Manual Pull Tab Entry Modal -->
-    <div class="modal" id="manualEntryModal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3 class="modal-title">Add Unlisted Pull Tab Game</h3>
-            </div>
-            <div class="modal-body">
-                <p style="color: var(--text-secondary); margin-bottom: 20px;">
-                    Enter the game information exactly as it appears on the game packaging.
-                </p>
+        </div>
+        
+        <!-- Bingo Occasion Section -->
+        <div class="content-section" id="bingoOccasionSection">
+            <div class="form-card">
+                <div class="form-header">Bingo Occasion Report</div>
                 
-                <form id="manualGameForm">
+                <!-- Session Information -->
+                <div class="form-section-title">Session Information</div>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label class="form-label">Date of Occasion</label>
+                        <input type="date" class="form-input" id="occasionDate" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Day of Week</label>
+                        <select class="form-select" id="dayOfWeek">
+                            <option value="">Select Day</option>
+                            <option value="Sunday">Sunday</option>
+                            <option value="Monday">Monday</option>
+                            <option value="Tuesday">Tuesday</option>
+                            <option value="Wednesday">Wednesday</option>
+                            <option value="Thursday">Thursday</option>
+                            <option value="Friday">Friday</option>
+                            <option value="Saturday">Saturday</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Session Number</label>
+                        <select class="form-select" id="sessionNum">
+                            <option value="1">Session 1 (Morning)</option>
+                            <option value="2">Session 2 (Afternoon)</option>
+                            <option value="3">Session 3 (Evening)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Closet Worker Name</label>
+                        <input type="text" class="form-input" id="closetWorker" placeholder="Enter full name" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Lion in Charge (Pull-Tabs)</label>
+                        <input type="text" class="form-input" id="lionInCharge" placeholder="Enter full name">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Total Players</label>
+                        <input type="number" class="form-input" id="totalPlayers" placeholder="0" min="0">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Starting Cash</label>
+                        <input type="number" class="form-input" id="startingCash" placeholder="0.00" step="0.01">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Number of Bingo Games</label>
+                        <input type="number" class="form-input" id="bingoGamesCount" placeholder="0" min="0">
+                    </div>
+                </div>
+                
+                <!-- Progressive Games Information -->
+                <div class="form-section-title">Progressive Games Information</div>
+                <div class="progressive-container">
+                    <div class="progressive-card">
+                        <div class="progressive-title">First Progressive</div>
+                        <div class="form-group">
+                            <label class="form-label">Progressive Jackpot Offered</label>
+                            <input type="number" class="form-input" id="prog1Jackpot" placeholder="0.00" step="0.01">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Number of Balls to Win</label>
+                            <input type="number" class="form-input" id="prog1BallsToWin" placeholder="48" min="1" max="75">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Consolation Prize Offered</label>
+                            <input type="number" class="form-input" id="prog1Consolation" placeholder="100.00" step="0.01">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Actual Prize Awarded</label>
+                            <input type="number" class="form-input" id="prog1ActualPrize" placeholder="0.00" step="0.01">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Actual Balls Called</label>
+                            <input type="number" class="form-input" id="prog1ActualBalls" placeholder="0" min="0" max="75">
+                        </div>
+                    </div>
+                    
+                    <div class="progressive-card">
+                        <div class="progressive-title">Second Progressive</div>
+                        <div class="form-group">
+                            <label class="form-label">Progressive Jackpot Offered</label>
+                            <input type="number" class="form-input" id="prog2Jackpot" placeholder="0.00" step="0.01">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Number of Balls to Win</label>
+                            <input type="number" class="form-input" id="prog2BallsToWin" placeholder="47" min="1" max="75">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Consolation Prize Offered</label>
+                            <input type="number" class="form-input" id="prog2Consolation" placeholder="100.00" step="0.01">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Actual Prize Awarded</label>
+                            <input type="number" class="form-input" id="prog2ActualPrize" placeholder="0.00" step="0.01">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Actual Balls Called</label>
+                            <input type="number" class="form-input" id="prog2ActualBalls" placeholder="0" min="0" max="75">
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Special Games ($250 Letter X, $250 Number 7, $500 Coverall) -->
+                <div class="form-section-title">Special Games</div>
+                <div class="special-games-grid">
+                    <div class="special-game-card">
+                        <div class="special-game-title">$250 Letter X</div>
+                        <div class="form-group">
+                            <label class="form-label">Prize Amount</label>
+                            <input type="number" class="form-input" value="250.00" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Actual Prize Paid</label>
+                            <input type="number" class="form-input" id="letterXPrize" placeholder="250.00" step="0.01">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Balls Called</label>
+                            <input type="number" class="form-input" id="letterXBalls" placeholder="0" min="0" max="75">
+                        </div>
+                    </div>
+                    
+                    <div class="special-game-card">
+                        <div class="special-game-title">$250 Number 7</div>
+                        <div class="form-group">
+                            <label class="form-label">Prize Amount</label>
+                            <input type="number" class="form-input" value="250.00" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Actual Prize Paid</label>
+                            <input type="number" class="form-input" id="number7Prize" placeholder="250.00" step="0.01">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Balls Called</label>
+                            <input type="number" class="form-input" id="number7Balls" placeholder="0" min="0" max="75">
+                        </div>
+                    </div>
+                    
+                    <div class="special-game-card">
+                        <div class="special-game-title">$500 Coverall</div>
+                        <div class="form-group">
+                            <label class="form-label">Prize Amount</label>
+                            <input type="number" class="form-input" value="500.00" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Actual Prize Paid</label>
+                            <input type="number" class="form-input" id="coverallPrize" placeholder="500.00" step="0.01">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Balls Called</label>
+                            <input type="number" class="form-input" id="coverallBalls" placeholder="0" min="0" max="75">
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Door Sales Entry (e-BOS Data) -->
+                <div class="form-section-title">Door Sales Summary (from e-BOS)</div>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label class="form-label">6 Face (6 Packs) - Net Sold</label>
+                        <input type="number" class="form-input" id="sixFaceNet" placeholder="0" onchange="calcSale(this, 10, 'sixFaceSales')">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">6 Face - Sales ($)</label>
+                        <input type="number" class="form-input" id="sixFaceSales" placeholder="0.00" readonly>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">9 Face Solid - Net Sold</label>
+                        <input type="number" class="form-input" id="nineSolidNet" placeholder="0" onchange="calcSale(this, 15, 'nineSolidSales')">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">9 Face Solid - Sales ($)</label>
+                        <input type="number" class="form-input" id="nineSolidSales" placeholder="0.00" readonly>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">9 Face Stripe - Net Sold</label>
+                        <input type="number" class="form-input" id="nineStripeNet" placeholder="0" onchange="calcSale(this, 10, 'nineStripeSales')">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">9 Face Stripe - Sales ($)</label>
+                        <input type="number" class="form-input" id="nineStripeSales" placeholder="0.00" readonly>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Birthday Pack (BOGO) - Count</label>
+                        <input type="number" class="form-input" id="birthdayBOGO" placeholder="0">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Birthday Sales ($)</label>
+                        <input type="number" class="form-input" value="0.00" readonly>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Coverall Extra - Net Sold</label>
+                        <input type="number" class="form-input" id="coverallExtraNet" placeholder="0" onchange="calcSale(this, 1, 'coverallExtraSales')">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Coverall Extra - Sales ($)</label>
+                        <input type="number" class="form-input" id="coverallExtraSales" placeholder="0.00" readonly>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Early Bird Double - Net Sold</label>
+                        <input type="number" class="form-input" id="earlyBirdNet" placeholder="0" onchange="calcSale(this, 5, 'earlyBirdSales')">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Early Bird - Sales ($)</label>
+                        <input type="number" class="form-input" id="earlyBirdSales" placeholder="0.00" readonly>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Letter X Extra - Net Sold</label>
+                        <input type="number" class="form-input" id="letterXNet" placeholder="0" onchange="calcSale(this, 1, 'letterXSales')">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Letter X - Sales ($)</label>
+                        <input type="number" class="form-input" id="letterXSales" placeholder="0.00" readonly>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Number 7 Extra - Net Sold</label>
+                        <input type="number" class="form-input" id="number7Net" placeholder="0" onchange="calcSale(this, 1, 'number7Sales')">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Number 7 - Sales ($)</label>
+                        <input type="number" class="form-input" id="number7Sales" placeholder="0.00" readonly>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Progressive 18 Face ($5) - Net</label>
+                        <input type="number" class="form-input" id="prog18Net" placeholder="0" onchange="calcSale(this, 5, 'prog18Sales')">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Prog 18 - Sales ($)</label>
+                        <input type="number" class="form-input" id="prog18Sales" placeholder="0.00" readonly>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Progressive 3 Face ($1) - Net</label>
+                        <input type="number" class="form-input" id="prog3Net" placeholder="0" onchange="calcSale(this, 1, 'prog3Sales')">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Prog 3 - Sales ($)</label>
+                        <input type="number" class="form-input" id="prog3Sales" placeholder="0.00" readonly>
+                    </div>
+                </div>
+                
+                <!-- Electronic & Miscellaneous -->
+                <div class="form-section-title">Electronic & Miscellaneous Sales</div>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label class="form-label">Electronic Bingo Total</label>
+                        <input type="number" class="form-input" id="electronicTotal" placeholder="0.00" step="0.01" onchange="updateTotals()">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Daubers Sold</label>
+                        <input type="number" class="form-input" id="dauberCount" placeholder="0" onchange="calcSale(this, 2, 'dauberSales')">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Dauber Sales ($)</label>
+                        <input type="number" class="form-input" id="dauberSales" placeholder="0.00" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Other Misc Sales</label>
+                        <input type="number" class="form-input" id="miscSales" placeholder="0.00" step="0.01" onchange="updateTotals()">
+                    </div>
+                </div>
+                
+                <!-- Other Prize Information -->
+                <div class="form-section-title">Other Bingo Prizes</div>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label class="form-label">Regular Games Total Prizes</label>
+                        <input type="number" class="form-input" id="regularPrizes" placeholder="0.00" step="0.01" onchange="updateBingoPrizes()">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Early Bird Total Prizes</label>
+                        <input type="number" class="form-input" id="earlyBirdPrizes" placeholder="0.00" step="0.01" onchange="updateBingoPrizes()">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Total Bingo Prizes Awarded</label>
+                        <input type="number" class="form-input" id="totalBingoPrizes" placeholder="0.00" readonly>
+                    </div>
+                </div>
+                
+                <!-- Summary -->
+                <div class="cash-summary">
+                    <div class="cash-card">
+                        <div class="cash-label">Paper Sales</div>
+                        <div class="cash-amount amount-neutral" id="paperTotal">$0.00</div>
+                    </div>
+                    <div class="cash-card">
+                        <div class="cash-label">Electronic</div>
+                        <div class="cash-amount amount-neutral" id="electronicDisplay">$0.00</div>
+                    </div>
+                    <div class="cash-card">
+                        <div class="cash-label">Miscellaneous</div>
+                        <div class="cash-amount amount-neutral" id="miscDisplay">$0.00</div>
+                    </div>
+                    <div class="cash-card">
+                        <div class="cash-label">Bingo Gross</div>
+                        <div class="cash-amount amount-positive" id="bingoGross">$0.00</div>
+                    </div>
+                </div>
+                
+                <div class="btn-group">
+                    <button class="btn btn-primary" onclick="saveBingoOccasion()">
+                        <i class="material-icons">save</i> Save Occasion Data
+                    </button>
+                    <button class="btn btn-info" onclick="clearBingoForm()">
+                        <i class="material-icons">clear</i> Clear Form
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Pull-Tabs Section -->
+        <div class="content-section" id="pullTabsSection">
+            <div class="form-card">
+                <div class="form-header">Pull-Tab Sales Entry</div>
+                
+                <div class="pull-tab-entry">
                     <div class="form-grid">
                         <div class="form-group">
-                            <label class="form-label">Game Name</label>
-                            <input type="text" class="form-input" id="manualGameName" required>
+                            <label class="form-label">Select Game</label>
+                            <select class="form-select" id="ptGameSelect" onchange="loadPTGame()">
+                                <option value="">Choose a game...</option>
+                            </select>
                         </div>
                         <div class="form-group">
-                            <label class="form-label">Full Name</label>
-                            <input type="text" class="form-input" id="manualFullName" required>
+                            <label class="form-label">Serial Number</label>
+                            <input type="text" class="form-input" id="ptSerial" placeholder="Enter serial #">
                         </div>
                         <div class="form-group">
-                            <label class="form-label">Form Number</label>
-                            <input type="text" class="form-input" id="manualFormNumber" required>
+                            <label class="form-label">Starting Tickets</label>
+                            <input type="number" class="form-input" id="ptStarting" placeholder="0" onchange="calcPT()">
                         </div>
                         <div class="form-group">
-                            <label class="form-label">Top Prize</label>
-                            <input type="number" class="form-input" id="manualTopPrize" step="0.01" required>
+                            <label class="form-label">Ending Tickets</label>
+                            <input type="number" class="form-input" id="ptEnding" placeholder="0" onchange="calcPT()">
                         </div>
                         <div class="form-group">
-                            <label class="form-label">Ticket Count</label>
-                            <input type="number" class="form-input" id="manualTicketCount" required>
+                            <label class="form-label">Tickets Sold</label>
+                            <input type="number" class="form-input" id="ptSold" placeholder="0" readonly>
                         </div>
                         <div class="form-group">
                             <label class="form-label">Price Per Ticket</label>
-                            <input type="number" class="form-input" id="manualPricePerTicket" step="0.01" required>
+                            <input type="number" class="form-input" id="ptPrice" value="1.00" readonly>
                         </div>
                         <div class="form-group">
-                            <label class="form-label">Total Payout</label>
-                            <input type="number" class="form-input" id="manualTotalPayout" step="0.01" required>
+                            <label class="form-label">Gross Sales</label>
+                            <input type="number" class="form-input" id="ptGross" placeholder="0.00" readonly>
                         </div>
                         <div class="form-group">
-                            <label class="form-label">Manufacturer</label>
-                            <input type="text" class="form-input" id="manualManufacturer">
+                            <label class="form-label">Prizes Paid</label>
+                            <input type="number" class="form-input" id="ptPrizes" placeholder="0.00" onchange="calcPT()">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Net Profit</label>
+                            <input type="number" class="form-input" id="ptNet" placeholder="0.00" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Ideal Profit</label>
+                            <input type="number" class="form-input" id="ptIdeal" placeholder="0.00" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Cash Turned In</label>
+                            <input type="number" class="form-input" id="ptCashIn" placeholder="0.00" onchange="calcPTVariance()">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Cash Variance</label>
+                            <input type="number" class="form-input" id="ptVariance" placeholder="0.00" readonly>
                         </div>
                     </div>
-                </form>
+                    
+                    <div class="btn-group">
+                        <button class="btn btn-success" onclick="addPullTab()">
+                            <i class="material-icons">add</i> Add Game
+                        </button>
+                        <button class="btn btn-warning" onclick="clearPTForm()">
+                            <i class="material-icons">clear</i> Clear
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Pull-Tab Summary -->
+                <div class="form-section-title">Today's Pull-Tab Activity</div>
+                <div class="table-responsive">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Game</th>
+                                <th>Serial</th>
+                                <th>Sold</th>
+                                <th>Gross</th>
+                                <th>Prizes</th>
+                                <th>Net</th>
+                                <th>Cash In</th>
+                                <th>Variance</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="ptTableBody">
+                            <tr>
+                                <td colspan="9" style="text-align: center;">No pull-tabs recorded yet</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <!-- Pull-Tab Totals -->
+                <div class="cash-summary">
+                    <div class="cash-card">
+                        <div class="cash-label">Total Gross</div>
+                        <div class="cash-amount amount-neutral" id="ptTotalGross">$0.00</div>
+                    </div>
+                    <div class="cash-card">
+                        <div class="cash-label">Total Prizes</div>
+                        <div class="cash-amount amount-negative" id="ptTotalPrizes">$0.00</div>
+                    </div>
+                    <div class="cash-card">
+                        <div class="cash-label">Total Net</div>
+                        <div class="cash-amount amount-positive" id="ptTotalNet">$0.00</div>
+                    </div>
+                    <div class="cash-card">
+                        <div class="cash-label">Total Cash In</div>
+                        <div class="cash-amount amount-positive" id="ptTotalCash">$0.00</div>
+                    </div>
+                </div>
+                
+                <div class="btn-group">
+                    <button class="btn btn-primary" onclick="savePullTabs()">
+                        <i class="material-icons">save</i> Save All Pull-Tabs
+                    </button>
+                </div>
             </div>
-            <div class="modal-footer">
-                <button class="btn btn-secondary" onclick="closeManualEntryModal()">Cancel</button>
-                <button class="btn btn-primary" onclick="addManualGame()">
-                    <i class="material-icons">add</i>
-                    Add Game
-                </button>
+        </div>
+        
+        <!-- Cash Close Section -->
+        <div class="content-section" id="cashCloseSection">
+            <div class="form-card">
+                <div class="form-header">Session Cash Reconciliation</div>
+                
+                <!-- Income Summary -->
+                <div class="form-section-title">Income Summary</div>
+                <div class="cash-summary">
+                    <div class="cash-card">
+                        <div class="cash-label">Starting Cash</div>
+                        <div class="cash-amount amount-neutral" id="closeStartCash">$0.00</div>
+                    </div>
+                    <div class="cash-card">
+                        <div class="cash-label">Bingo Sales</div>
+                        <div class="cash-amount amount-positive" id="closeBingoSales">$0.00</div>
+                    </div>
+                    <div class="cash-card">
+                        <div class="cash-label">Pull-Tab Sales</div>
+                        <div class="cash-amount amount-positive" id="closePTSales">$0.00</div>
+                    </div>
+                    <div class="cash-card">
+                        <div class="cash-label">Gross Receipts</div>
+                        <div class="cash-amount amount-positive" id="closeGross">$0.00</div>
+                    </div>
+                </div>
+                
+                <!-- Prizes Summary -->
+                <div class="form-section-title">Prizes Paid</div>
+                <div class="cash-summary">
+                    <div class="cash-card">
+                        <div class="cash-label">Bingo Prizes</div>
+                        <div class="cash-amount amount-negative" id="closeBingoPrizes">$0.00</div>
+                    </div>
+                    <div class="cash-card">
+                        <div class="cash-label">Pull-Tab Prizes</div>
+                        <div class="cash-amount amount-negative" id="closePTPrizes">$0.00</div>
+                    </div>
+                    <div class="cash-card">
+                        <div class="cash-label">Total Prizes</div>
+                        <div class="cash-amount amount-negative" id="closeTotalPrizes">$0.00</div>
+                    </div>
+                    <div class="cash-card">
+                        <div class="cash-label">Net Receipts</div>
+                        <div class="cash-amount amount-positive" id="closeNet">$0.00</div>
+                    </div>
+                </div>
+                
+                <!-- Deposit & Offage -->
+                <div class="form-section-title">Deposit & Offage Analysis</div>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label class="form-label">Actual Deposit Amount</label>
+                        <input type="number" class="form-input" id="actualDeposit" placeholder="0.00" step="0.01" onchange="calculateOffage()">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Expected Deposit</label>
+                        <input type="number" class="form-input" id="expectedDeposit" placeholder="0.00" readonly>
+                    </div>
+                </div>
+                
+                <div class="cash-summary">
+                    <div class="cash-card">
+                        <div class="cash-label">Bingo Offage</div>
+                        <div class="cash-amount" id="bingoOffage">$0.00</div>
+                    </div>
+                    <div class="cash-card">
+                        <div class="cash-label">Pull-Tab Offage</div>
+                        <div class="cash-amount" id="ptOffage">$0.00</div>
+                    </div>
+                    <div class="cash-card">
+                        <div class="cash-label">Combined Offage</div>
+                        <div class="cash-amount" id="totalOffage">$0.00</div>
+                    </div>
+                    <div class="cash-card">
+                        <div class="cash-label">Status</div>
+                        <div class="cash-amount" id="offageStatus">BALANCED</div>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Offage Comments/Explanation</label>
+                    <textarea class="form-textarea" id="offageComments" rows="3" placeholder="Explain any variances..."></textarea>
+                </div>
+                
+                <div class="btn-group">
+                    <button class="btn btn-success" onclick="completeReconciliation()">
+                        <i class="material-icons">check_circle</i> Complete Reconciliation
+                    </button>
+                    <button class="btn btn-primary" onclick="printReconciliation()">
+                        <i class="material-icons">print</i> Print Report
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Reports Section -->
+        <div class="content-section" id="reportsSection">
+            <div class="form-card">
+                <div class="form-header">Generate Reports</div>
+                
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label class="form-label">Report Type</label>
+                        <select class="form-select" id="reportType">
+                            <option value="occasion">MGC Occasion Report</option>
+                            <option value="quarterly">MGC Quarterly Report</option>
+                            <option value="monthly">Monthly Board Report</option>
+                            <option value="pulltab">Pull-Tab Analysis</option>
+                            <option value="cash">Cash Analysis</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Quarter</label>
+                        <select class="form-select" id="reportQuarter">
+                            <option value="1">Q1 (Jan-Mar)</option>
+                            <option value="2">Q2 (Apr-Jun)</option>
+                            <option value="3">Q3 (Jul-Sep)</option>
+                            <option value="4">Q4 (Oct-Dec)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Year</label>
+                        <select class="form-select" id="reportYear">
+                            <option value="2025">2025</option>
+                            <option value="2024">2024</option>
+                            <option value="2023">2023</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="btn-group">
+                    <button class="btn btn-primary" onclick="generateReport()">
+                        <i class="material-icons">assessment</i> Generate
+                    </button>
+                    <button class="btn btn-success" onclick="exportReport()">
+                        <i class="material-icons">download</i> Export PDF
+                    </button>
+                </div>
+            </div>
+            
+            <div class="form-card" id="reportPreview" style="display: none;">
+                <div class="form-header">Report Preview</div>
+                <div id="reportContent"></div>
             </div>
         </div>
     </div>
-
+    
+    <!-- Toast Container -->
+    <div class="toast-container" id="toastContainer"></div>
+    
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-content">
+            <div class="spinner"></div>
+            <p>Processing...</p>
+        </div>
+    </div>
+    
+    <!-- JavaScript -->
     <script>
-        // ============================================
-        // INITIALIZATION
-        // ============================================
+        // Configuration
+        const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbyAo1IsuFempsKZ3pE9fbxFImbFI-Ff2fpn6DJZEhlLXpkFrQJo6cdvyoOj4T1QkHmskg/exec';
         
-        document.addEventListener('DOMContentLoaded', function() {
-            checkAuthentication();
-            setupEventListeners();
-            setDefaultDate();
-        });
+        // Session Data
+        let currentSession = {
+            id: null,
+            data: {},
+            pullTabs: []
+        };
         
-        function setupEventListeners() {
-            // Door sales quantity fields - calculate total on change
-            const doorSalesFields = ['paper6face', 'paper9solid', 'paper9stripe', 'paperearlybird', 'elec40', 'elec65', 'daubers'];
-            doorSalesFields.forEach(field => {
-                const element = document.getElementById(field);
-                if (element) {
-                    element.addEventListener('input', calculateDoorSalesTotal);
-                }
-            });
+        // Initialize
+        document.addEventListener('DOMContentLoaded', init);
+        
+        function init() {
+            document.getElementById('currentDate').textContent = new Date().toLocaleDateString();
+            document.getElementById('occasionDate').valueAsDate = new Date();
+            loadDashboard();
+            loadPullTabGames();
+            setDayOfWeek();
         }
         
-        function setDefaultDate() {
-            const today = new Date().toISOString().split('T')[0];
-            const dateField = document.getElementById('occasionDate');
-            if (dateField) {
-                dateField.value = today;
-            }
+        function setDayOfWeek() {
+            const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+            const today = new Date();
+            document.getElementById('dayOfWeek').value = days[today.getDay()];
         }
         
-        // ============================================
-        // AUTHENTICATION
-        // ============================================
-        
-        function checkAuthentication() {
-            const savedUser = localStorage.getItem('rlc_user');
-            const savedRole = localStorage.getItem('rlc_role');
-            
-            if (savedUser && savedRole) {
-                currentUser = savedUser;
-                currentRole = savedRole;
-                showApplication();
-            }
-        }
-        
-        async function handleLogin(event) {
-            event.preventDefault();
-            
-            const username = document.getElementById('username').value;
-            const password = document.getElementById('password').value;
-            const loginBtn = document.getElementById('loginBtn');
-            
-            loginBtn.innerHTML = '<i class="material-icons">hourglass_empty</i> Signing in...';
-            loginBtn.disabled = true;
-            
-            // Hardcoded authentication for demonstration
-            // In production, this would call the API
-            const users = {
-                // Admins
-                'wigginsb': { password: 'wig2866', role: 'admin', name: 'B. Wiggins' },
-                'williamsm': { password: 'wil0387', role: 'admin', name: 'M. Williams' },
-                // Closet Workers
-                'asberryw': { password: 'asb0260', role: 'closet', name: 'W. Asberry' },
-                'parryw': { password: 'par9666', role: 'closet', name: 'W. Parry' },
-                'hribarc': { password: 'hri0643', role: 'closet', name: 'C. Hribar' },
-                'eppersonb': { password: 'epp3532', role: 'closet', name: 'B. Epperson' }
-            };
-            
-            if (users[username] && users[username].password === password) {
-                currentUser = users[username].name;
-                currentRole = users[username].role;
-                
-                localStorage.setItem('rlc_user', currentUser);
-                localStorage.setItem('rlc_role', currentRole);
-                
-                showApplication();
-            } else {
-                alert('Invalid username or password');
-                loginBtn.innerHTML = '<i class="material-icons">login</i> Sign In';
-                loginBtn.disabled = false;
-            }
-        }
-        
-        function showApplication() {
-            document.getElementById('loginScreen').classList.add('hidden');
-            document.getElementById('appContainer').classList.add('active');
-            
-            // Update user info
-            document.getElementById('userName').textContent = currentUser;
-            document.getElementById('userRole').textContent = currentRole;
-            
-            // Setup navigation based on role
-            setupNavigation();
-            
-            // Load initial data
-            loadDashboardStats();
-            loadPullTabLibrary();
-            
-            // Show/hide admin features
-            if (currentRole === 'admin') {
-                document.querySelectorAll('.admin-only').forEach(el => {
-                    el.style.display = '';
-                });
-            }
-            
-            // Show dashboard by default
-            showSection('dashboard');
-        }
-        
-        function logout() {
-            if (confirm('Are you sure you want to logout?')) {
-                localStorage.removeItem('rlc_user');
-                localStorage.removeItem('rlc_role');
-                location.reload();
-            }
-        }
-        
-        // ============================================
-        // NAVIGATION
-        // ============================================
-        
-        function setupNavigation() {
-            const navTabs = document.getElementById('navTabs');
-            
-            const tabs = [
-                { id: 'dashboard', label: 'Dashboard', icon: 'dashboard', roles: ['admin', 'closet'] },
-                { id: 'doorSales', label: 'Door Sales', icon: 'point_of_sale', roles: ['admin', 'closet'] },
-                { id: 'pullTabs', label: 'Pull Tabs', icon: 'confirmation_number', roles: ['admin', 'closet'] },
-                { id: 'users', label: 'Users', icon: 'people', roles: ['admin'] },
-                { id: 'reports', label: 'Reports', icon: 'assessment', roles: ['admin'] },
-                { id: 'settings', label: 'Settings', icon: 'settings', roles: ['admin'] }
-            ];
-            
-            navTabs.innerHTML = tabs
-                .filter(tab => tab.roles.includes(currentRole))
-                .map(tab => `
-                    <button class="nav-tab" onclick="showSection('${tab.id}')" data-section="${tab.id}">
-                        <i class="material-icons">${tab.icon}</i>
-                        <span>${tab.label}</span>
-                    </button>
-                `).join('');
-        }
-        
-        function showSection(sectionId) {
-            // Update navigation
-            document.querySelectorAll('.nav-tab').forEach(tab => {
-                tab.classList.remove('active');
-                if (tab.dataset.section === sectionId) {
-                    tab.classList.add('active');
-                }
-            });
-            
-            // Update content sections
+        // Navigation
+        function switchTab(tabName) {
             document.querySelectorAll('.content-section').forEach(section => {
                 section.classList.remove('active');
             });
+            document.querySelectorAll('.nav-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
             
-            const targetSection = document.getElementById(sectionId + 'Section');
-            if (targetSection) {
-                targetSection.classList.add('active');
-            }
+            document.getElementById(tabName + 'Section').classList.add('active');
+            event.target.closest('.nav-tab').classList.add('active');
             
-            // Load section-specific data
-            if (sectionId === 'users' && currentRole === 'admin') {
-                loadUsers();
+            if (tabName === 'cashClose') {
+                loadReconciliation();
             }
         }
         
-        function navigateToSection(sectionId) {
-            const tab = document.querySelector(`[data-section="${sectionId}"]`);
-            if (tab) {
-                tab.click();
-            }
-        }
-        
-        // ============================================
-        // DASHBOARD
-        // ============================================
-        
-        async function loadDashboardStats() {
+        // API Calls
+        async function apiCall(action, data) {
+            showLoading();
             try {
-                // Fetch from API
-                const response = await fetch(API_URL + '?action=getDashboardStats');
-                const data = await response.json();
+                const response = await fetch(WEB_APP_URL, {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({action, ...data})
+                });
                 
-                if (data.success) {
-                    document.getElementById('todayRevenue').textContent = (data.data.todaysRevenue || 0).toFixed(2);
-                    document.getElementById('totalPlayers').textContent = data.data.totalPlayers || 0;
-                    document.getElementById('gamesPlayed').textContent = data.data.gamesPlayed || 0;
-                    document.getElementById('weekTotal').textContent = (data.data.weekRevenue || 0).toFixed(2);
+                const result = await response.json();
+                if (result.error) throw new Error(result.error);
+                return result;
+            } catch (error) {
+                showToast('Error: ' + error.message, 'error');
+                throw error;
+            } finally {
+                hideLoading();
+            }
+        }
+        
+        // Dashboard Functions
+        async function loadDashboard() {
+            try {
+                const data = await apiCall('getDashboard', {});
+                document.getElementById('sessionsCount').textContent = data.sessions || 0;
+                document.getElementById('playersCount').textContent = data.players || 0;
+                document.getElementById('grossReceipts').textContent = '$' + (data.gross || 0).toFixed(2);
+                document.getElementById('netProfit').textContent = '$' + (data.net || 0).toFixed(2);
+                
+                loadRecentActivity();
+            } catch (error) {
+                console.error('Dashboard load error:', error);
+            }
+        }
+        
+        async function loadRecentActivity() {
+            try {
+                const data = await apiCall('getRecentActivity', {});
+                const tbody = document.getElementById('activityBody');
+                
+                if (data.activity && data.activity.length > 0) {
+                    tbody.innerHTML = data.activity.map(row => `
+                        <tr>
+                            <td>${new Date(row.date).toLocaleString()}</td>
+                            <td>${row.session}</td>
+                            <td>${row.type}</td>
+                            <td>$${row.amount.toFixed(2)}</td>
+                            <td><span class="status-indicator status-${row.status}">${row.status}</span></td>
+                        </tr>
+                    `).join('');
+                } else {
+                    tbody.innerHTML = '<tr><td colspan="5" style="text-align: center;">No recent activity</td></tr>';
                 }
             } catch (error) {
-                console.log('Using demo data for dashboard');
-                // Demo data
-                document.getElementById('todayRevenue').textContent = '3,847.50';
-                document.getElementById('totalPlayers').textContent = '127';
-                document.getElementById('gamesPlayed').textContent = '8';
-                document.getElementById('weekTotal').textContent = '18,965.00';
+                console.error('Activity load error:', error);
             }
         }
         
-        // ============================================
-        // DOOR SALES RECORDING
-        // ============================================
+        // Bingo Occasion Functions
+        function calcSale(input, price, targetId) {
+            const quantity = parseInt(input.value) || 0;
+            const sales = quantity * price;
+            document.getElementById(targetId).value = sales.toFixed(2);
+            updateTotals();
+        }
         
-        function calculateDoorSalesTotal() {
+        function updateTotals() {
+            let paperTotal = 0;
+            const paperFields = ['sixFaceSales', 'nineSolidSales', 'nineStripeSales', 
+                               'coverallExtraSales', 'earlyBirdSales', 'letterXSales', 
+                               'number7Sales', 'prog18Sales', 'prog3Sales'];
+            
+            paperFields.forEach(id => {
+                paperTotal += parseFloat(document.getElementById(id).value) || 0;
+            });
+            
+            const dauberSales = parseFloat(document.getElementById('dauberSales').value) || 0;
+            const miscSales = parseFloat(document.getElementById('miscSales').value) || 0;
+            const electronicTotal = parseFloat(document.getElementById('electronicTotal').value) || 0;
+            
+            const miscTotal = dauberSales + miscSales;
+            const bingoGross = paperTotal + electronicTotal + miscTotal;
+            
+            document.getElementById('paperTotal').textContent = '$' + paperTotal.toFixed(2);
+            document.getElementById('electronicDisplay').textContent = '$' + electronicTotal.toFixed(2);
+            document.getElementById('miscDisplay').textContent = '$' + miscTotal.toFixed(2);
+            document.getElementById('bingoGross').textContent = '$' + bingoGross.toFixed(2);
+        }
+        
+        function updateBingoPrizes() {
             let total = 0;
             
-            // Paper products
-            total += (parseInt(document.getElementById('paper6face').value) || 0) * 10;
-            total += (parseInt(document.getElementById('paper9solid').value) || 0) * 15;
-            total += (parseInt(document.getElementById('paper9stripe').value) || 0) * 10;
-            total += (parseInt(document.getElementById('paperearlybird').value) || 0) * 2.5;
+            // Progressive prizes
+            total += parseFloat(document.getElementById('prog1ActualPrize').value) || 0;
+            total += parseFloat(document.getElementById('prog2ActualPrize').value) || 0;
             
-            // Electronic
-            total += (parseInt(document.getElementById('elec40').value) || 0) * 40;
-            total += (parseInt(document.getElementById('elec65').value) || 0) * 65;
+            // Special games
+            total += parseFloat(document.getElementById('letterXPrize').value) || 0;
+            total += parseFloat(document.getElementById('number7Prize').value) || 0;
+            total += parseFloat(document.getElementById('coverallPrize').value) || 0;
             
-            // Misc
-            total += (parseInt(document.getElementById('daubers').value) || 0) * 2;
+            // Regular and early bird
+            total += parseFloat(document.getElementById('regularPrizes').value) || 0;
+            total += parseFloat(document.getElementById('earlyBirdPrizes').value) || 0;
             
-            document.getElementById('doorSalesTotal').textContent = total.toFixed(2);
+            document.getElementById('totalBingoPrizes').value = total.toFixed(2);
         }
         
-        async function saveDoorSales(event) {
-            event.preventDefault();
-            
-            const data = {
-                date: document.getElementById('occasionDate').value,
-                session: document.getElementById('sessionType').value,
-                playerCount: document.getElementById('playerCount').value,
-                paper6Face: document.getElementById('paper6face').value,
-                paper9Solid: document.getElementById('paper9solid').value,
-                paper9Stripe: document.getElementById('paper9stripe').value,
-                paperEarlybird: document.getElementById('paperearlybird').value,
-                elec40: document.getElementById('elec40').value,
-                elec65: document.getElementById('elec65').value,
-                daubers: document.getElementById('daubers').value,
-                worker: currentUser
-            };
-            
-            // Send to API
+        async function saveBingoOccasion() {
             try {
-                await fetch(API_URL, {
-                    method: 'POST',
-                    mode: 'no-cors',
-                    headers: { 'Content-Type': 'text/plain' },
-                    body: JSON.stringify({
-                        action: 'saveDoorSales',
-                        data: data
-                    })
-                });
+                const data = {
+                    date: document.getElementById('occasionDate').value,
+                    day: document.getElementById('dayOfWeek').value,
+                    sessionNumber: document.getElementById('sessionNum').value,
+                    closetWorker: document.getElementById('closetWorker').value,
+                    lionInCharge: document.getElementById('lionInCharge').value,
+                    totalPlayers: parseInt(document.getElementById('totalPlayers').value) || 0,
+                    startingCash: parseFloat(document.getElementById('startingCash').value) || 0,
+                    bingoGamesCount: parseInt(document.getElementById('bingoGamesCount').value) || 0,
+                    
+                    // Progressive Games
+                    prog1Jackpot: parseFloat(document.getElementById('prog1Jackpot').value) || 0,
+                    prog1BallsToWin: parseInt(document.getElementById('prog1BallsToWin').value) || 0,
+                    prog1Consolation: parseFloat(document.getElementById('prog1Consolation').value) || 0,
+                    prog1ActualPrize: parseFloat(document.getElementById('prog1ActualPrize').value) || 0,
+                    prog1ActualBalls: parseInt(document.getElementById('prog1ActualBalls').value) || 0,
+                    
+                    prog2Jackpot: parseFloat(document.getElementById('prog2Jackpot').value) || 0,
+                    prog2BallsToWin: parseInt(document.getElementById('prog2BallsToWin').value) || 0,
+                    prog2Consolation: parseFloat(document.getElementById('prog2Consolation').value) || 0,
+                    prog2ActualPrize: parseFloat(document.getElementById('prog2ActualPrize').value) || 0,
+                    prog2ActualBalls: parseInt(document.getElementById('prog2ActualBalls').value) || 0,
+                    
+                    // Special Games
+                    letterXPrize: parseFloat(document.getElementById('letterXPrize').value) || 0,
+                    letterXBalls: parseInt(document.getElementById('letterXBalls').value) || 0,
+                    number7Prize: parseFloat(document.getElementById('number7Prize').value) || 0,
+                    number7Balls: parseInt(document.getElementById('number7Balls').value) || 0,
+                    coverallPrize: parseFloat(document.getElementById('coverallPrize').value) || 0,
+                    coverallBalls: parseInt(document.getElementById('coverallBalls').value) || 0,
+                    
+                    // Door Sales
+                    doorSales: gatherDoorSalesData(),
+                    
+                    // Other Prizes
+                    regularPrizes: parseFloat(document.getElementById('regularPrizes').value) || 0,
+                    earlyBirdPrizes: parseFloat(document.getElementById('earlyBirdPrizes').value) || 0,
+                    totalBingoPrizes: parseFloat(document.getElementById('totalBingoPrizes').value) || 0
+                };
                 
-                alert('Door sales recorded successfully!');
-                document.getElementById('doorSalesForm').reset();
-                setDefaultDate();
-                calculateDoorSalesTotal();
-                loadDashboardStats();
-                
-            } catch (error) {
-                alert('Error saving door sales. Please try again.');
-            }
-        }
-        
-        // ============================================
-        // PULL TAB RECORDING
-        // ============================================
-        
-        async function loadPullTabLibrary() {
-            try {
-                const response = await fetch(API_URL + '?action=getPullTabLibrary');
-                const data = await response.json();
-                
-                if (data.success && data.data) {
-                    pullTabLibrary = data.data;
-                    displayPullTabLibrary();
+                const result = await apiCall('createBingoSession', data);
+                if (result.success) {
+                    currentSession.id = result.sessionId;
+                    currentSession.data = data;
+                    showToast('Bingo occasion saved successfully!', 'success');
+                    document.getElementById('currentSession').textContent = 'Session: ' + result.sessionId;
                 }
             } catch (error) {
-                console.log('Using demo pull tab data');
-                // Demo data with full names
-                pullTabLibrary = [
-                    { formNumber: '354GA', gameName: 'Race Horse Downs', fullName: 'Race Horse Downs 250 / $1900', topPrize: 250, pricePerTicket: 0.50, ticketCount: 3800, totalPayout: 1400, idealProfit: 500 },
-                    { formNumber: '353GA', gameName: 'Race Horse Downs', fullName: 'Race Horse Downs 500 / $3800', topPrize: 500, pricePerTicket: 0.50, ticketCount: 7600, totalPayout: 2800, idealProfit: 1000 },
-                    { formNumber: '7319D', gameName: 'Pot of Gold', fullName: 'Pot of Gold 140 / $731', topPrize: 140, pricePerTicket: 0.25, ticketCount: 2924, totalPayout: 540, idealProfit: 191 },
-                    { formNumber: '7320D', gameName: 'Pot of Gold', fullName: 'Pot of Gold 280 / $2320', topPrize: 280, pricePerTicket: 0.50, ticketCount: 4640, totalPayout: 1718, idealProfit: 602 },
-                    { formNumber: '7321D', gameName: 'Pot of Gold', fullName: 'Pot of Gold 400 / $2321', topPrize: 400, pricePerTicket: 0.50, ticketCount: 4640, totalPayout: 1718, idealProfit: 602 }
-                ];
-                displayPullTabLibrary();
+                console.error('Save error:', error);
             }
         }
         
-        function displayPullTabLibrary() {
-            const container = document.getElementById('pullTabList');
+        function gatherDoorSalesData() {
+            return {
+                sixFaceNet: parseInt(document.getElementById('sixFaceNet').value) || 0,
+                sixFaceSales: parseFloat(document.getElementById('sixFaceSales').value) || 0,
+                nineSolidNet: parseInt(document.getElementById('nineSolidNet').value) || 0,
+                nineSolidSales: parseFloat(document.getElementById('nineSolidSales').value) || 0,
+                nineStripeNet: parseInt(document.getElementById('nineStripeNet').value) || 0,
+                nineStripeSales: parseFloat(document.getElementById('nineStripeSales').value) || 0,
+                birthdayBOGO: parseInt(document.getElementById('birthdayBOGO').value) || 0,
+                coverallExtraNet: parseInt(document.getElementById('coverallExtraNet').value) || 0,
+                coverallExtraSales: parseFloat(document.getElementById('coverallExtraSales').value) || 0,
+                earlyBirdNet: parseInt(document.getElementById('earlyBirdNet').value) || 0,
+                earlyBirdSales: parseFloat(document.getElementById('earlyBirdSales').value) || 0,
+                letterXNet: parseInt(document.getElementById('letterXNet').value) || 0,
+                letterXSales: parseFloat(document.getElementById('letterXSales').value) || 0,
+                number7Net: parseInt(document.getElementById('number7Net').value) || 0,
+                number7Sales: parseFloat(document.getElementById('number7Sales').value) || 0,
+                prog18Net: parseInt(document.getElementById('prog18Net').value) || 0,
+                prog18Sales: parseFloat(document.getElementById('prog18Sales').value) || 0,
+                prog3Net: parseInt(document.getElementById('prog3Net').value) || 0,
+                prog3Sales: parseFloat(document.getElementById('prog3Sales').value) || 0,
+                electronicTotal: parseFloat(document.getElementById('electronicTotal').value) || 0,
+                dauberCount: parseInt(document.getElementById('dauberCount').value) || 0,
+                dauberSales: parseFloat(document.getElementById('dauberSales').value) || 0,
+                miscSales: parseFloat(document.getElementById('miscSales').value) || 0
+            };
+        }
+        
+        // Pull-Tab Functions
+        async function loadPullTabGames() {
+            try {
+                const result = await apiCall('getActivePullTabGames', {});
+                const select = document.getElementById('ptGameSelect');
+                select.innerHTML = '<option value="">Choose a game...</option>';
+                
+                result.games.forEach(game => {
+                    const option = document.createElement('option');
+                    option.value = JSON.stringify(game);
+                    option.textContent = `${game.gameName} (${game.formNumber})`;
+                    select.appendChild(option);
+                });
+            } catch (error) {
+                console.error('Load PT games error:', error);
+            }
+        }
+        
+        function loadPTGame() {
+            const select = document.getElementById('ptGameSelect');
+            if (select.value) {
+                const game = JSON.parse(select.value);
+                document.getElementById('ptStarting').value = game.ticketCount;
+                document.getElementById('ptPrice').value = game.pricePerTicket;
+                document.getElementById('ptIdeal').value = game.idealProfit;
+                calcPT();
+            }
+        }
+        
+        function calcPT() {
+            const starting = parseInt(document.getElementById('ptStarting').value) || 0;
+            const ending = parseInt(document.getElementById('ptEnding').value) || 0;
+            const price = parseFloat(document.getElementById('ptPrice').value) || 0;
+            const prizes = parseFloat(document.getElementById('ptPrizes').value) || 0;
             
-            if (pullTabLibrary.length === 0) {
-                container.innerHTML = '<p style="text-align: center; color: var(--text-secondary);">No games available in library</p>';
+            const sold = starting - ending;
+            const gross = sold * price;
+            const net = gross - prizes;
+            
+            document.getElementById('ptSold').value = sold;
+            document.getElementById('ptGross').value = gross.toFixed(2);
+            document.getElementById('ptNet').value = net.toFixed(2);
+            
+            calcPTVariance();
+        }
+        
+        function calcPTVariance() {
+            const net = parseFloat(document.getElementById('ptNet').value) || 0;
+            const cashIn = parseFloat(document.getElementById('ptCashIn').value) || 0;
+            const variance = cashIn - net;
+            
+            document.getElementById('ptVariance').value = variance.toFixed(2);
+        }
+        
+        function addPullTab() {
+            const gameSelect = document.getElementById('ptGameSelect');
+            if (!gameSelect.value) {
+                showToast('Please select a game', 'warning');
                 return;
             }
             
-            container.innerHTML = pullTabLibrary.map(game => `
-                <div class="pulltab-item" onclick="selectPullTabGame('${game.formNumber}')">
-                    <div class="pulltab-info">
-                        <div class="pulltab-fullname">${game.fullName || game.gameName}</div>
-                        <div class="pulltab-details">
-                            Form: ${game.formNumber} | 
-                            Tickets: ${game.ticketCount} | 
-                            Price: $${game.pricePerTicket}
-                        </div>
-                    </div>
-                    <div class="pulltab-prize">$${game.topPrize}</div>
-                </div>
-            `).join('');
-        }
-        
-        function selectPullTabGame(formNumber) {
-            // Remove previous selection
-            document.querySelectorAll('.pulltab-item').forEach(item => {
-                item.classList.remove('selected');
-            });
-            
-            // Add selection to clicked item
-            event.currentTarget.classList.add('selected');
-            
-            // Find the game in library
-            selectedGame = pullTabLibrary.find(g => g.formNumber === formNumber);
-            
-            if (selectedGame) {
-                // Show the form
-                document.getElementById('pullTabForm').style.display = 'block';
-                
-                // Pre-populate fields
-                document.getElementById('pricePerTicket').value = selectedGame.pricePerTicket || '';
-                
-                // Clear other fields for new entry
-                document.getElementById('serialNumber').value = '';
-                document.getElementById('startingTickets').value = selectedGame.ticketCount || '';
-                document.getElementById('endingTickets').value = '';
-                document.getElementById('ticketsSold').value = '';
-                document.getElementById('grossSales').value = '';
-                document.getElementById('prizesPaid').value = '';
-                document.getElementById('netProfit').value = '';
-                document.getElementById('idealProfit').value = selectedGame.idealProfit || '';
-                
-                // Scroll form into view
-                document.getElementById('pullTabForm').scrollIntoView({ behavior: 'smooth' });
-            }
-        }
-        
-        function calculatePullTabValues() {
-            if (!selectedGame) return;
-            
-            const starting = parseInt(document.getElementById('startingTickets').value) || 0;
-            const ending = parseInt(document.getElementById('endingTickets').value) || 0;
-            const ticketsSold = starting - ending;
-            const pricePerTicket = parseFloat(document.getElementById('pricePerTicket').value) || selectedGame.pricePerTicket || 0;
-            
-            document.getElementById('ticketsSold').value = ticketsSold;
-            
-            const grossSales = ticketsSold * pricePerTicket;
-            document.getElementById('grossSales').value = grossSales.toFixed(2);
-            
-            // Calculate ideal profit based on library data
-            if (selectedGame.idealProfit) {
-                const profitRatio = selectedGame.idealProfit / selectedGame.ticketCount;
-                const expectedProfit = ticketsSold * profitRatio;
-                document.getElementById('idealProfit').value = expectedProfit.toFixed(2);
-            }
-            
-            // Update net profit if prizes paid is entered
-            const prizesPaid = parseFloat(document.getElementById('prizesPaid').value) || 0;
-            if (prizesPaid > 0) {
-                const netProfit = grossSales - prizesPaid;
-                document.getElementById('netProfit').value = netProfit.toFixed(2);
-            }
-        }
-        
-        async function savePullTab(event) {
-            event.preventDefault();
-            
-            if (!selectedGame) {
-                alert('Please select a game first');
-                return;
-            }
-            
-            const data = {
-                formNumber: selectedGame.formNumber,
-                gameName: selectedGame.fullName || selectedGame.gameName,
-                serialNumber: document.getElementById('serialNumber').value,
-                startingTickets: document.getElementById('startingTickets').value,
-                endingTickets: document.getElementById('endingTickets').value,
-                ticketsSold: document.getElementById('ticketsSold').value,
-                pricePerTicket: document.getElementById('pricePerTicket').value,
-                grossSales: document.getElementById('grossSales').value,
-                prizesPaid: document.getElementById('prizesPaid').value,
-                netProfit: document.getElementById('netProfit').value,
-                idealProfit: document.getElementById('idealProfit').value,
-                worker: currentUser
+            const game = JSON.parse(gameSelect.value);
+            const ptData = {
+                gameName: game.gameName,
+                formNumber: game.formNumber,
+                serial: document.getElementById('ptSerial').value,
+                starting: parseInt(document.getElementById('ptStarting').value),
+                ending: parseInt(document.getElementById('ptEnding').value),
+                sold: parseInt(document.getElementById('ptSold').value),
+                price: parseFloat(document.getElementById('ptPrice').value),
+                gross: parseFloat(document.getElementById('ptGross').value),
+                prizes: parseFloat(document.getElementById('ptPrizes').value),
+                net: parseFloat(document.getElementById('ptNet').value),
+                ideal: parseFloat(document.getElementById('ptIdeal').value),
+                cashIn: parseFloat(document.getElementById('ptCashIn').value),
+                variance: parseFloat(document.getElementById('ptVariance').value)
             };
             
-            // Send to API
+            currentSession.pullTabs.push(ptData);
+            updatePTTable();
+            clearPTForm();
+            showToast('Pull-tab game added!', 'success');
+        }
+        
+        function updatePTTable() {
+            const tbody = document.getElementById('ptTableBody');
+            
+            if (currentSession.pullTabs.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="9" style="text-align: center;">No pull-tabs recorded yet</td></tr>';
+                return;
+            }
+            
+            let totalGross = 0, totalPrizes = 0, totalNet = 0, totalCash = 0;
+            
+            tbody.innerHTML = currentSession.pullTabs.map((pt, index) => {
+                totalGross += pt.gross;
+                totalPrizes += pt.prizes;
+                totalNet += pt.net;
+                totalCash += pt.cashIn;
+                
+                return `
+                    <tr>
+                        <td>${pt.gameName}</td>
+                        <td>${pt.serial}</td>
+                        <td>${pt.sold}</td>
+                        <td>$${pt.gross.toFixed(2)}</td>
+                        <td>$${pt.prizes.toFixed(2)}</td>
+                        <td>$${pt.net.toFixed(2)}</td>
+                        <td>$${pt.cashIn.toFixed(2)}</td>
+                        <td>$${pt.variance.toFixed(2)}</td>
+                        <td><button class="btn btn-danger" onclick="removePT(${index})">Remove</button></td>
+                    </tr>
+                `;
+            }).join('');
+            
+            document.getElementById('ptTotalGross').textContent = '$' + totalGross.toFixed(2);
+            document.getElementById('ptTotalPrizes').textContent = '$' + totalPrizes.toFixed(2);
+            document.getElementById('ptTotalNet').textContent = '$' + totalNet.toFixed(2);
+            document.getElementById('ptTotalCash').textContent = '$' + totalCash.toFixed(2);
+        }
+        
+        function removePT(index) {
+            currentSession.pullTabs.splice(index, 1);
+            updatePTTable();
+        }
+        
+        function clearPTForm() {
+            document.getElementById('ptGameSelect').selectedIndex = 0;
+            document.getElementById('ptSerial').value = '';
+            document.getElementById('ptStarting').value = '';
+            document.getElementById('ptEnding').value = '';
+            document.getElementById('ptSold').value = '';
+            document.getElementById('ptPrice').value = '';
+            document.getElementById('ptGross').value = '';
+            document.getElementById('ptPrizes').value = '';
+            document.getElementById('ptNet').value = '';
+            document.getElementById('ptIdeal').value = '';
+            document.getElementById('ptCashIn').value = '';
+            document.getElementById('ptVariance').value = '';
+        }
+        
+        async function savePullTabs() {
+            if (currentSession.pullTabs.length === 0) {
+                showToast('No pull-tabs to save', 'warning');
+                return;
+            }
+            
             try {
-                await fetch(API_URL, {
-                    method: 'POST',
-                    mode: 'no-cors',
-                    headers: { 'Content-Type': 'text/plain' },
-                    body: JSON.stringify({
-                        action: 'recordPullTabSale',
-                        data: data
-                    })
+                const result = await apiCall('savePullTabs', {
+                    sessionId: currentSession.id,
+                    pullTabs: currentSession.pullTabs
                 });
                 
-                alert('Pull tab record saved successfully!');
-                clearPullTabForm();
-                loadDashboardStats();
-                
+                if (result.success) {
+                    showToast('Pull-tabs saved successfully!', 'success');
+                }
             } catch (error) {
-                alert('Error saving pull tab record. Please try again.');
+                console.error('Save PT error:', error);
             }
         }
         
-        function clearPullTabForm() {
-            document.getElementById('pullTabForm').reset();
-            document.getElementById('pullTabForm').style.display = 'none';
-            document.querySelectorAll('.pulltab-item').forEach(item => {
-                item.classList.remove('selected');
+        // Cash Reconciliation Functions
+        async function loadReconciliation() {
+            if (!currentSession.id) {
+                showToast('No active session', 'warning');
+                return;
+            }
+            
+            try {
+                const result = await apiCall('getSessionSummary', {sessionId: currentSession.id});
+                
+                document.getElementById('closeStartCash').textContent = '$' + (result.startingCash || 0).toFixed(2);
+                document.getElementById('closeBingoSales').textContent = '$' + (result.bingoSales || 0).toFixed(2);
+                document.getElementById('closePTSales').textContent = '$' + (result.pullTabSales || 0).toFixed(2);
+                document.getElementById('closeGross').textContent = '$' + (result.grossReceipts || 0).toFixed(2);
+                document.getElementById('closeBingoPrizes').textContent = '$' + (result.bingoPrizes || 0).toFixed(2);
+                document.getElementById('closePTPrizes').textContent = '$' + (result.pullTabPrizes || 0).toFixed(2);
+                document.getElementById('closeTotalPrizes').textContent = '$' + (result.totalPrizes || 0).toFixed(2);
+                document.getElementById('closeNet').textContent = '$' + (result.netReceipts || 0).toFixed(2);
+                document.getElementById('expectedDeposit').value = (result.netReceipts || 0).toFixed(2);
+                
+            } catch (error) {
+                console.error('Load reconciliation error:', error);
+            }
+        }
+        
+        function calculateOffage() {
+            const expected = parseFloat(document.getElementById('expectedDeposit').value) || 0;
+            const actual = parseFloat(document.getElementById('actualDeposit').value) || 0;
+            const variance = actual - expected;
+            
+            // Simple offage calculation - would be more complex in production
+            const bingoOffage = variance * 0.6; // 60% attributed to bingo
+            const ptOffage = variance * 0.4; // 40% attributed to pull-tabs
+            
+            updateOffageDisplay('bingoOffage', bingoOffage);
+            updateOffageDisplay('ptOffage', ptOffage);
+            updateOffageDisplay('totalOffage', variance);
+            
+            const status = Math.abs(variance) < 5 ? 'BALANCED' : 
+                          variance > 0 ? 'OVER' : 'SHORT';
+            
+            const statusEl = document.getElementById('offageStatus');
+            statusEl.textContent = status;
+            statusEl.className = status === 'BALANCED' ? 'cash-amount amount-positive' :
+                                status === 'OVER' ? 'cash-amount amount-warning' :
+                                'cash-amount amount-negative';
+        }
+        
+        function updateOffageDisplay(elementId, amount) {
+            const element = document.getElementById(elementId);
+            element.textContent = '$' + Math.abs(amount).toFixed(2);
+            element.className = Math.abs(amount) < 5 ? 'cash-amount amount-neutral' :
+                               amount > 0 ? 'cash-amount amount-positive' :
+                               'cash-amount amount-negative';
+        }
+        
+        async function completeReconciliation() {
+            try {
+                const data = {
+                    sessionId: currentSession.id,
+                    actualDeposit: parseFloat(document.getElementById('actualDeposit').value) || 0,
+                    offageComments: document.getElementById('offageComments').value
+                };
+                
+                const result = await apiCall('completeReconciliation', data);
+                
+                if (result.success) {
+                    showToast('Reconciliation completed!', 'success');
+                    if (result.status === 'BALANCED') {
+                        showToast('Session balanced!', 'success');
+                    } else {
+                        showToast(`Session ${result.status}: $${Math.abs(result.variance).toFixed(2)}`, 'warning');
+                    }
+                }
+            } catch (error) {
+                console.error('Complete reconciliation error:', error);
+            }
+        }
+        
+        // Report Functions
+        async function generateReport() {
+            const type = document.getElementById('reportType').value;
+            const quarter = document.getElementById('reportQuarter').value;
+            const year = document.getElementById('reportYear').value;
+            
+            try {
+                const result = await apiCall('generateReport', {type, quarter, year});
+                
+                if (result.success) {
+                    document.getElementById('reportContent').innerHTML = result.html;
+                    document.getElementById('reportPreview').style.display = 'block';
+                    showToast('Report generated!', 'success');
+                }
+            } catch (error) {
+                console.error('Generate report error:', error);
+            }
+        }
+        
+        function exportReport() {
+            window.print();
+        }
+        
+        // Utility Functions
+        function showToast(message, type = 'info') {
+            const container = document.getElementById('toastContainer');
+            const toast = document.createElement('div');
+            toast.className = `toast toast-${type}`;
+            
+            const icon = type === 'success' ? 'check_circle' :
+                        type === 'error' ? 'error' :
+                        type === 'warning' ? 'warning' : 'info';
+            
+            toast.innerHTML = `
+                <i class="material-icons">${icon}</i>
+                <span>${message}</span>
+            `;
+            
+            container.appendChild(toast);
+            
+            setTimeout(() => toast.remove(), 5000);
+        }
+        
+        function showLoading() {
+            document.getElementById('loadingOverlay').style.display = 'flex';
+        }
+        
+        function hideLoading() {
+            document.getElementById('loadingOverlay').style.display = 'none';
+        }
+        
+        function clearBingoForm() {
+            document.querySelectorAll('#bingoOccasionSection input, #bingoOccasionSection select').forEach(field => {
+                if (field.type !== 'button' && !field.readOnly) {
+                    field.value = '';
+                }
             });
-            selectedGame = null;
+            updateTotals();
+            updateBingoPrizes();
         }
         
-        // ============================================
-        // MANUAL GAME ENTRY
-        // ============================================
-        
-        function showManualEntryModal() {
-            document.getElementById('manualEntryModal').classList.add('active');
+        function startNewOccasion() {
+            currentSession = {id: null, data: {}, pullTabs: []};
+            clearBingoForm();
+            switchTab('bingoOccasion');
         }
         
-        function closeManualEntryModal() {
-            document.getElementById('manualEntryModal').classList.remove('active');
-            document.getElementById('manualGameForm').reset();
-        }
-        
-        function addManualGame() {
-            const manualGame = {
-                formNumber: document.getElementById('manualFormNumber').value,
-                gameName: document.getElementById('manualGameName').value,
-                fullName: document.getElementById('manualFullName').value,
-                topPrize: parseFloat(document.getElementById('manualTopPrize').value),
-                ticketCount: parseInt(document.getElementById('manualTicketCount').value),
-                pricePerTicket: parseFloat(document.getElementById('manualPricePerTicket').value),
-                totalPayout: parseFloat(document.getElementById('manualTotalPayout').value),
-                manufacturer: document.getElementById('manualManufacturer').value,
-                isManual: true
-            };
-            
-            // Calculate ideal profit
-            const totalSales = manualGame.ticketCount * manualGame.pricePerTicket;
-            manualGame.idealProfit = totalSales - manualGame.totalPayout;
-            
-            // Add to library temporarily
-            pullTabLibrary.unshift(manualGame);
-            
-            // Refresh display
-            displayPullTabLibrary();
-            
-            // Close modal
-            closeManualEntryModal();
-            
-            // Automatically select the new game
-            selectPullTabGame(manualGame.formNumber);
-        }
-        
-        // ============================================
-        // USER MANAGEMENT (Admin Only)
-        // ============================================
-        
-        async function loadUsers() {
-            if (currentRole !== 'admin') return;
-            
-            const tbody = document.getElementById('usersTableBody');
-            
-            // Demo user data
-            const users = [
-                { username: 'wigginsb', name: 'B. Wiggins', role: 'admin', email: 'bill.wiggins@mypcb.com', active: true, lastLogin: '2024-01-15 14:30' },
-                { username: 'williamsm', name: 'M. Williams', role: 'admin', email: 'mzwrolla@gmail.com', active: true, lastLogin: '2024-01-14 09:15' },
-                { username: 'asberryw', name: 'W. Asberry', role: 'closet', email: 'asberry4@me.com', active: true, lastLogin: '2024-01-15 22:45' },
-                { username: 'parryw', name: 'W. Parry', role: 'closet', email: 'wjlparry@gmail.com', active: true, lastLogin: '2024-01-14 23:10' },
-                { username: 'hribarc', name: 'C. Hribar', role: 'closet', email: 'carminhribar@gmail.com', active: true, lastLogin: '2024-01-13 22:30' }
-            ];
-            
-            tbody.innerHTML = users.map(user => `
-                <tr>
-                    <td>${user.username}</td>
-                    <td>${user.name}</td>
-                    <td><span class="badge ${user.role}">${user.role}</span></td>
-                    <td>${user.email}</td>
-                    <td>${user.active ? '<span class="badge active">Active</span>' : '<span class="badge inactive">Inactive</span>'}</td>
-                    <td>${user.lastLogin}</td>
-                    <td>
-                        <button class="btn btn-sm btn-secondary" onclick="editUser('${user.username}')">Edit</button>
-                    </td>
-                </tr>
-            `).join('');
-        }
-        
-        // ============================================
-        // REPORTS (Admin Only)
-        // ============================================
-        
-        function openReport(type) {
-            // Open report in new tab via Google Apps Script
-            const reportUrl = API_URL + '?action=generateReport&type=' + type;
-            window.open(reportUrl, '_blank');
-        }
-        
-        // ============================================
-        // PLACEHOLDER FUNCTIONS
-        // ============================================
-        
-        function showAddUserModal() {
-            alert('Add User functionality coming soon');
-        }
-        
-        function editUser(username) {
-            alert('Edit user: ' + username);
-        }
-        
-        function saveSettings() {
-            alert('Settings saved successfully!');
+        function printReconciliation() {
+            window.print();
         }
     </script>
 </body>
